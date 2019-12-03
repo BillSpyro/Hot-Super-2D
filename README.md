@@ -1,3 +1,3 @@
-# Game-Project
+# Hot-Super-2D
 
-https://billspyro.github.io/Game-Project/index.html
+https://billspyro.github.io/Hot-Super-2D/
