@@ -63,7 +63,7 @@
    }
 
    static create(pos) {
-     return new Player(pos.plus(new Vec(playerx), playery)),
+     return new Player(pos.plus(new Vec(playerx, playery)),
        new Vec(0, 0));
    }
  }
