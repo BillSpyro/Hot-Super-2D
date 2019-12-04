@@ -1,0 +1,41 @@
+.background {
+  background: white;
+  table-layout: fixed;
+  border-spacing: 0;
+}
+
+.background td {
+  padding: 0;
+}
+
+.enemy {
+  background: red;
+}
+
+.wall {
+  background: black;
+}
+
+.actor {
+  position: absolute;
+}
+
+.exit {
+  background: green;
+}
+
+.player {
+  background: blue;
+}
+
+.lost .player {
+  background: rgb(160, 64, 64);
+}
+.won .player {
+  box-shadow: -4px -7px 8px white, 4px -7px 8px white;
+}
+
+.game {
+  overflow: hidden;
+  position: relative;
+}
