@@ -63,7 +63,7 @@
    }
 
    static create(pos) {
-     return new Player(pos.plus(new Vec(0, 0)),
+     return new Player(pos.plus(new Vec(playerx), playery)),
        new Vec(0, 0));
    }
  }
@@ -165,7 +165,23 @@
      return rect;
    }));
  }
-
+ let playerx = 0
+ let playery = 0
+ const clearElement = (element) => {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+};
+window.addEventListener("keydown" , event => {
+  if (event.key == "s"){
+    playery=playery+1
+    let el = document.querySelector("body")
+    clearElement(el)
+    let simpleLevel = new Level(testLevel);
+    let display = new DOMDisplay(document.body, simpleLevel);
+    display.syncState(State.start(simpleLevel));
+  }
+})
  DOMDisplay.prototype.syncState = function(state) {
    if (this.actorLayer) this.actorLayer.remove();
    this.actorLayer = drawActors(state.actors);
