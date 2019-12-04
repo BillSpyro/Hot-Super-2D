@@ -80,7 +80,7 @@
    }
 
    static create(pos) {
-     return new Enemy(pos.plus(new Vec(0, 0)),
+     return new Enemy(pos.plus(new Vec(enx, eny)),
        new Vec(0, 0));
    }
  }
@@ -167,6 +167,8 @@
  }
  let playerx = 0
  let playery = 0
+ let enx = 0
+ let eny = 0
  const clearElement = (element) => {
   while (element.firstChild) {
     element.removeChild(element.firstChild);
@@ -175,6 +177,7 @@
 window.addEventListener("keydown" , event => {
   if (event.key == "s"){
     playery=playery+1
+    eny=eny+1
     let el = document.querySelector("body")
     clearElement(el)
     let simpleLevel = new Level(testLevel);
@@ -182,6 +185,40 @@ window.addEventListener("keydown" , event => {
     display.syncState(State.start(simpleLevel));
   }
 })
+window.addEventListener("keydown" , event => {
+  if (event.key == "w"){
+    playery=playery-1
+    eny=eny-1
+    let el = document.querySelector("body")
+    clearElement(el)
+    let simpleLevel = new Level(testLevel);
+    let display = new DOMDisplay(document.body, simpleLevel);
+    display.syncState(State.start(simpleLevel));
+  }
+})
+window.addEventListener("keydown" , event => {
+  if (event.key == "a"){
+    playerx=playerx-1
+    enx=enx-1
+    let el = document.querySelector("body")
+    clearElement(el)
+    let simpleLevel = new Level(testLevel);
+    let display = new DOMDisplay(document.body, simpleLevel);
+    display.syncState(State.start(simpleLevel));
+  }
+})
+window.addEventListener("keydown" , event => {
+  if (event.key == "d"){
+    playerx=playerx+1
+    enx= enx + 1
+    let el = document.querySelector("body")
+    clearElement(el)
+    let simpleLevel = new Level(testLevel);
+    let display = new DOMDisplay(document.body, simpleLevel);
+    display.syncState(State.start(simpleLevel));
+  }
+})
+
  DOMDisplay.prototype.syncState = function(state) {
    if (this.actorLayer) this.actorLayer.remove();
    this.actorLayer = drawActors(state.actors);
