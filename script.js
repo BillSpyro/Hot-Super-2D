@@ -170,97 +170,94 @@
  let enx = 0
  let eny = 0
  const clearElement = (element) => {
-  while (element.firstChild) {
-    element.removeChild(element.firstChild);
-  }
-};
-window.addEventListener("keydown" , event => {
-  if (event.key == "s"){
-    playery=playery+1
-    eny=eny+1
-    let el = document.querySelector("div")
-    clearElement(el)
-    let simpleLevel = new Level(testLevel);
-    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-    display.syncState(State.start(simpleLevel));
-  }
-})
-window.addEventListener("keydown" , event => {
-  if (event.key == "w"){
-    playery=playery-1
-    eny=eny-1
-    let el = document.querySelector("div")
-    clearElement(el)
-    let simpleLevel = new Level(testLevel);
-    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-    display.syncState(State.start(simpleLevel));
-  }
-})
-window.addEventListener("keydown" , event => {
-  if (event.key == "a"){
-    playerx=playerx-1
-    enx=enx-1
-    let el = document.querySelector("div")
-    clearElement(el)
-    let simpleLevel = new Level(testLevel);
-    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-    display.syncState(State.start(simpleLevel));
-  }
-})
-window.addEventListener("keydown" , event => {
-  if (event.key == "d"){
-    playerx=playerx+ 1
-    enx= enx + 1
-    let el = document.querySelector("div")
-    console.log(el)
-    clearElement(el)
-    let simpleLevel = new Level(testLevel);
-    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-    display.syncState(State.start(simpleLevel));
-  }
-})
-window.addEventListener("keydown" , event => {
-  if (event.key == "ArrowDown"){
-    eny=eny+1
-    let el = document.querySelector("div")
-    clearElement(el)
-    let simpleLevel = new Level(testLevel);
-    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-    display.syncState(State.start(simpleLevel));
-  }
-})
-window.addEventListener("keydown" , event => {
-  if (event.key == "ArrowUp"){
-    eny=eny-1
-    let el = document.querySelector("div")
-    clearElement(el)
-    let simpleLevel = new Level(testLevel);
-    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-    display.syncState(State.start(simpleLevel));
-  }
-})
-window.addEventListener("keydown" , event => {
-  if (event.key == "ArrowLeft"){
-    enx=enx-1
-    let el = document.querySelector("div")
-    clearElement(el)
-    let simpleLevel = new Level(testLevel);
-    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-    display.syncState(State.start(simpleLevel));
-  }
-})
-window.addEventListener("keydown" , event => {
-  if (event.key == "ArrowRight"){
-    enx= enx + 1
-    let el = document.querySelector("div")
-    console.log(el)
-    clearElement(el)
-    let simpleLevel = new Level(testLevel);
-    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-    display.syncState(State.start(simpleLevel));
-  }
-})
-
+   while (element.firstChild) {
+     element.removeChild(element.firstChild);
+   }
+ };
+ window.addEventListener("keydown", event => {
+   if (event.key == "s") {
+     playery = playery + 1
+     eny = eny + 1
+     let el = document.querySelector("div")
+     clearElement(el)
+     let simpleLevel = new Level(testLevel);
+     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+     display.syncState(State.start(simpleLevel));
+   }
+ })
+ window.addEventListener("keydown", event => {
+   if (event.key == "w") {
+     playery = playery - 1
+     eny = eny - 1
+     let el = document.querySelector("div")
+     clearElement(el)
+     let simpleLevel = new Level(testLevel);
+     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+     display.syncState(State.start(simpleLevel));
+   }
+ })
+ window.addEventListener("keydown", event => {
+   if (event.key == "a") {
+     playerx = playerx - 1
+     enx = enx - 1
+     let el = document.querySelector("div")
+     clearElement(el)
+     let simpleLevel = new Level(testLevel);
+     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+     display.syncState(State.start(simpleLevel));
+   }
+ })
+ window.addEventListener("keydown", event => {
+   if (event.key == "d") {
+     playerx = playerx + 1
+     enx = enx + 1
+     let el = document.querySelector("div")
+     clearElement(el)
+     let simpleLevel = new Level(testLevel);
+     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+     display.syncState(State.start(simpleLevel));
+   }
+ })
+ window.addEventListener("keydown", event => {
+   if (event.key == "ArrowDown") {
+     eny = eny + 1
+     let el = document.querySelector("div")
+     clearElement(el)
+     let simpleLevel = new Level(testLevel);
+     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+     display.syncState(State.start(simpleLevel));
+   }
+ })
+ window.addEventListener("keydown", event => {
+   if (event.key == "ArrowUp") {
+     eny = eny - 1
+     let el = document.querySelector("div")
+     clearElement(el)
+     let simpleLevel = new Level(testLevel);
+     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+     display.syncState(State.start(simpleLevel));
+   }
+ })
+ window.addEventListener("keydown", event => {
+   if (event.key == "ArrowLeft") {
+     enx = enx - 1
+     let el = document.querySelector("div")
+     clearElement(el)
+     let simpleLevel = new Level(testLevel);
+     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+     display.syncState(State.start(simpleLevel));
+   }
+ })
+ window.addEventListener("keydown", event => {
+   if (event.key == "ArrowRight") {
+     enx = enx + 1
+     let el = document.querySelector("div")
+     clearElement(el)
+     let simpleLevel = new Level(testLevel);
+     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+     display.syncState(State.start(simpleLevel));
+   }
+ })
  DOMDisplay.prototype.syncState = function(state) {
    if (this.actorLayer) this.actorLayer.remove();
    this.actorLayer = drawActors(state.actors);
@@ -271,3 +268,16 @@ window.addEventListener("keydown" , event => {
  let simpleLevel = new Level(testLevel);
  let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
  display.syncState(State.start(simpleLevel));
+ let resetb = document.body.querySelector("button")
+
+ resetb.addEventListener("click", event => {
+   playerx = 0
+   playery = 0
+   enx = 0
+   eny = 0
+   let el = document.querySelector("div")
+   clearElement(el)
+   let simpleLevel = new Level(testLevel);
+   let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+   display.syncState(State.start(simpleLevel));
+ });
