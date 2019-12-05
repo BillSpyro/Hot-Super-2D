@@ -219,6 +219,47 @@ window.addEventListener("keydown" , event => {
     display.syncState(State.start(simpleLevel));
   }
 })
+window.addEventListener("keydown" , event => {
+  if (event.key == "ArrowDown"){
+    eny=eny+1
+    let el = document.querySelector("div")
+    clearElement(el)
+    let simpleLevel = new Level(testLevel);
+    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+    display.syncState(State.start(simpleLevel));
+  }
+})
+window.addEventListener("keydown" , event => {
+  if (event.key == "ArrowUp"){
+    eny=eny-1
+    let el = document.querySelector("div")
+    clearElement(el)
+    let simpleLevel = new Level(testLevel);
+    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+    display.syncState(State.start(simpleLevel));
+  }
+})
+window.addEventListener("keydown" , event => {
+  if (event.key == "ArrowLeft"){
+    enx=enx-1
+    let el = document.querySelector("div")
+    clearElement(el)
+    let simpleLevel = new Level(testLevel);
+    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+    display.syncState(State.start(simpleLevel));
+  }
+})
+window.addEventListener("keydown" , event => {
+  if (event.key == "ArrowRight"){
+    enx= enx + 1
+    let el = document.querySelector("div")
+    console.log(el)
+    clearElement(el)
+    let simpleLevel = new Level(testLevel);
+    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+    display.syncState(State.start(simpleLevel));
+  }
+})
 
  DOMDisplay.prototype.syncState = function(state) {
    if (this.actorLayer) this.actorLayer.remove();
