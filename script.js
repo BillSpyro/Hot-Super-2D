@@ -191,6 +191,15 @@
      element.removeChild(element.firstChild);
    }
  };
+ const wincon= function(){
+ getPosition()
+ if (overlap(player, exit) == true) {
+   let text = document.createElement("p")
+   text.textContent = "Win"
+   text.setAttribute("class", "win")
+   document.body.appendChild(text)
+ }
+}
  window.addEventListener("keydown", event => {
    if (event.key == "s") {
      playery = playery + 1
@@ -200,9 +209,8 @@
      let simpleLevel = new Level(testLevel);
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
+     wincon()
    }
- })
- window.addEventListener("keydown", event => {
    if (event.key == "w") {
      playery = playery - 1
      eny = eny - 1
@@ -211,9 +219,8 @@
      let simpleLevel = new Level(testLevel);
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
+     wincon()
    }
- })
- window.addEventListener("keydown", event => {
    if (event.key == "a") {
      playerx = playerx - 1
      enx = enx - 1
@@ -222,9 +229,8 @@
      let simpleLevel = new Level(testLevel);
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
+     wincon()
    }
- })
- window.addEventListener("keydown", event => {
    if (event.key == "d") {
      playerx = playerx + 1
      enx = enx + 1
@@ -233,9 +239,8 @@
      let simpleLevel = new Level(testLevel);
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
+     wincon()
    }
- })
- window.addEventListener("keydown", event => {
    if (event.key == "ArrowDown") {
      eny = eny + 1
      let el = document.querySelector("div")
@@ -283,6 +288,7 @@
  };
 
  function overlap(actor1, actor2) {
+<<<<<<< Updated upstream
    console.log("Actor1 Left: " + actor1.style.left);
    console.log("Actor1 Top: " + actor1.style.top);
    console.log("Actor2 Left: " + actor2.style.left);
@@ -343,6 +349,22 @@
 
    }
  }
+=======
+   console.log("Left: "+actor1.style.left);
+   console.log("Top: "+actor1.style.top);
+   console.log("Left: "+actor2.style.left);
+   console.log("Top: "+actor2.style.top);
+  return actor1.style.left == actor2.style.left &&
+         actor1.style.top == actor2.style.top
+}
+
+function getPosition(){
+player = document.body.querySelector(".player");
+ enemy = document.body.querySelectorAll(".enemy");
+wall = document.body.querySelectorAll(".wall");
+exit = document.body.querySelector(".exit");
+}
+>>>>>>> Stashed changes
 
  let simpleLevel = new Level(testLevel);
  let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
