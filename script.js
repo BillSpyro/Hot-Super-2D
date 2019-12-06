@@ -200,7 +200,14 @@
    document.body.appendChild(text)
  }
 }
- window.addEventListener("keydown", event => {
+const death = function(){
+  getPosition()
+  if (overlapMulitple(player,enemy) == true) {
+    window.removeEventListener("keydown",keys)
+  }
+}
+ window.addEventListener("keydown", keys)
+function keys(){
    if (event.key == "s") {
      playery = playery + 1
      eny = eny + 1
@@ -210,6 +217,7 @@
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
      wincon()
+     death()
    }
    if (event.key == "w") {
      playery = playery - 1
@@ -220,6 +228,7 @@
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
      wincon()
+     death()
    }
    if (event.key == "a") {
      playerx = playerx - 1
@@ -230,6 +239,7 @@
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
      wincon()
+      death()
    }
    if (event.key == "d") {
      playerx = playerx + 1
@@ -240,6 +250,7 @@
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
      wincon()
+     death()
    }
    if (event.key == "ArrowDown") {
      eny = eny + 1
@@ -248,8 +259,9 @@
      let simpleLevel = new Level(testLevel);
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
+     death()
    }
- })
+ }
  window.addEventListener("keydown", event => {
    if (event.key == "ArrowUp") {
      eny = eny - 1
@@ -369,4 +381,5 @@
    let simpleLevel = new Level(testLevel);
    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
    display.syncState(State.start(simpleLevel));
+   window.addEventListener("keydown", keys)
  });
