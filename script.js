@@ -283,20 +283,66 @@
  };
 
  function overlap(actor1, actor2) {
-   console.log("Left: "+actor1.style.left);
-   console.log("Top: "+actor1.style.top);
-   console.log("Left: "+actor2.style.left);
-   console.log("Top: "+actor2.style.top);
-  return actor1.style.left == actor2.style.left &&
-         actor2.style.top == actor2.style.top
-}
+   console.log("Actor1 Left: " + actor1.style.left);
+   console.log("Actor1 Top: " + actor1.style.top);
+   console.log("Actor2 Left: " + actor2.style.left);
+   console.log("Actor2 Top: " + actor2.style.top);
+   return actor1.style.left == actor2.style.left &&
+     actor1.style.top == actor2.style.top
+ }
 
-function getPosition(){
-player = document.body.querySelector(".player");
- enemy = document.body.querySelectorAll(".enemy");
-wall = document.body.querySelectorAll(".wall");
-exit = document.body.querySelector(".exit");
-}
+ function getPosition() {
+   player = document.body.querySelector(".player");
+   enemy = document.body.querySelectorAll(".enemy");
+   wall = document.body.querySelectorAll(".wall");
+   exit = document.body.querySelector(".exit");
+ }
+
+ function overlapMulitple(actor1, actor2) {
+
+   if (actor1.length == undefined && actor2.length == undefined) {
+     return overlap(actor1, actor2);
+
+   } else if (actor1.length != undefined && actor2.length == undefined) {
+
+     for (let i = 0; i < actor1.length; i++) {
+       if (overlap(actor1[i], actor2)) {
+
+         return true;
+
+       }
+     }
+
+     return false;
+
+   } else if (actor1.length == undefined && actor2.length != undefined) {
+
+     for (let i = 0; i < actor2.length; i++) {
+       if (overlap(actor1, actor2[i])) {
+
+         return true;
+
+       }
+     }
+
+     return false;
+
+   } else {
+
+     for (let i = 0; i < actor1.length; i++) {
+       for (let j = 0; j < actor2.length; j++) {
+         if (overlap(actor1[i], actor2[j])) {
+
+           return true;
+
+         }
+       }
+     }
+
+     return false;
+
+   }
+ }
 
  let simpleLevel = new Level(testLevel);
  let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
@@ -304,9 +350,9 @@ exit = document.body.querySelector(".exit");
  let resetb = document.body.querySelector("button")
 
  let player = document.body.querySelector(".player");
-  let enemy = document.body.querySelectorAll(".enemy");
-   let wall = document.body.querySelectorAll(".wall");
-    let exit = document.body.querySelector(".exit");
+ let enemy = document.body.querySelectorAll(".enemy");
+ let wall = document.body.querySelectorAll(".wall");
+ let exit = document.body.querySelector(".exit");
 
  resetb.addEventListener("click", event => {
    playerx = 0
