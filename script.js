@@ -195,7 +195,7 @@
  getPosition()
  if (overlap(player, exit) == true) {
    let text = document.createElement("p")
-   text.textContent = "Win"
+   text.textContent = "HOT SUPER"
    text.setAttribute("class", "win")
    document.body.appendChild(text)
  }
