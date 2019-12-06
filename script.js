@@ -104,9 +104,26 @@
 
  Exit.prototype.size = new Vec(1, 1);
 
+ var Wall = class Wall {
+   constructor(pos) {
+     this.pos = pos;
+   }
+
+   get type() {
+     return "wall";
+   }
+
+   static create(pos) {
+     return new Wall(pos.plus(new Vec(0, 0)),
+       new Vec(0, 0));
+   }
+ }
+
+ Wall.prototype.size = new Vec(1, 1);
+
  var entities = {
    ".": "empty",
-   "#": "wall",
+   "#": Wall,
    "%": Enemy,
    "@": Player,
    "^": Exit
@@ -265,10 +282,31 @@
    this.dom.className = `game ${state.status}`;
  };
 
+ function overlap(actor1, actor2) {
+   console.log("Left: "+actor1.style.left);
+   console.log("Top: "+actor1.style.top);
+   console.log("Left: "+actor2.style.left);
+   console.log("Top: "+actor2.style.top);
+  return actor1.style.left == actor2.style.left &&
+         actor2.style.top == actor2.style.top
+}
+
+function getPosition(){
+player = document.body.querySelector(".player");
+ enemy = document.body.querySelectorAll(".enemy");
+wall = document.body.querySelectorAll(".wall");
+exit = document.body.querySelector(".exit");
+}
+
  let simpleLevel = new Level(testLevel);
  let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
  display.syncState(State.start(simpleLevel));
  let resetb = document.body.querySelector("button")
+
+ let player = document.body.querySelector(".player");
+  let enemy = document.body.querySelectorAll(".enemy");
+   let wall = document.body.querySelectorAll(".wall");
+    let exit = document.body.querySelector(".exit");
 
  resetb.addEventListener("click", event => {
    playerx = 0
