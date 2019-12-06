@@ -204,13 +204,29 @@ const death = function(){
   getPosition()
   if (overlapMulitple(player,enemy) == true) {
     window.removeEventListener("keydown",keys)
-  }
+  let text = document.createElement("p")
+  text.textContent = "SQUISH"
+  text.setAttribute("class", "looser")
+  document.body.appendChild(text)
+}
+}
+const load = function() {
+  let el = document.querySelector("div")
+  clearElement(el)
+  let simpleLevel = new Level(testLevel);
+  let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+  display.syncState(State.start(simpleLevel));
 }
  window.addEventListener("keydown", keys)
 function keys(){
    if (event.key == "s") {
      playery = playery + 1
      eny = eny + 1
+     load()
+     getPosition()
+   if (overlapMulitple(player,wall) == true){
+      playery = playery - 1
+   }
      let el = document.querySelector("div")
      clearElement(el)
      let simpleLevel = new Level(testLevel);
@@ -222,17 +238,23 @@ function keys(){
    if (event.key == "w") {
      playery = playery - 1
      eny = eny - 1
-     let el = document.querySelector("div")
-     clearElement(el)
-     let simpleLevel = new Level(testLevel);
-     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-     display.syncState(State.start(simpleLevel));
+     load()
+     getPosition()
+     if (overlapMulitple(player,wall) == true){
+        playery = playery + 1
+     }
+     load()
      wincon()
      death()
    }
    if (event.key == "a") {
      playerx = playerx - 1
      enx = enx - 1
+     load()
+     getPosition()
+     if (overlapMulitple(player,wall)==true){
+       playerx = playerx + 1
+     }
      let el = document.querySelector("div")
      clearElement(el)
      let simpleLevel = new Level(testLevel);
@@ -244,14 +266,18 @@ function keys(){
    if (event.key == "d") {
      playerx = playerx + 1
      enx = enx + 1
+     load()
+     getPosition()
+     if (overlapMulitple(player,wall)==true){
+       playerx = playerx - 1
+     }
      let el = document.querySelector("div")
-     clearElement(el)
-     let simpleLevel = new Level(testLevel);
-     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-     display.syncState(State.start(simpleLevel));
+     load()
      wincon()
      death()
    }
+ }
+ window.addEventListener("keydown", event =>{
    if (event.key == "ArrowDown") {
      eny = eny + 1
      let el = document.querySelector("div")
@@ -261,7 +287,7 @@ function keys(){
      display.syncState(State.start(simpleLevel));
      death()
    }
- }
+ })
  window.addEventListener("keydown", event => {
    if (event.key == "ArrowUp") {
      eny = eny - 1
@@ -270,6 +296,7 @@ function keys(){
      let simpleLevel = new Level(testLevel);
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
+     death()
    }
  })
  window.addEventListener("keydown", event => {
@@ -280,6 +307,7 @@ function keys(){
      let simpleLevel = new Level(testLevel);
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
+     death()
    }
  })
  window.addEventListener("keydown", event => {
@@ -290,6 +318,7 @@ function keys(){
      let simpleLevel = new Level(testLevel);
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
+     death()
    }
  })
  DOMDisplay.prototype.syncState = function(state) {
