@@ -1,5 +1,5 @@
 .background {
-  background: white;
+  background: grey;
   table-layout: fixed;
   border-spacing: 0;
 }
@@ -63,5 +63,8 @@
 }
 
 .win {
-  font-size: 100px
+  font-size: 100px;
+  padding: 0;
+  margin: 0;
+  border : thin;
 }

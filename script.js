@@ -334,7 +334,7 @@
  const wincon = function() {
    getPosition()
    if (overlap(player, exit) == true) {
-     if (levelNumber !=2){
+     if (levelNumber !=3){
      window.removeEventListener("keydown", keys)
      let text = document.createElement("p")
      text.textContent = "HOT SUPER"
