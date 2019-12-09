@@ -264,11 +264,16 @@ if (overlap(player, exit) == true) {
      if (overlapMulitple(player, wall) == true) {
        playery = playery - 1
      }
-     let el = document.querySelector("div")
-     clearElement(el)
-     let simpleLevel = new Level(testLevel);
-     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-     display.syncState(State.start(simpleLevel));
+     if (overlapMulitple(enemy1, wall) == true) {
+       en1y = en1y - 1
+     }
+     if (overlapMulitple(enemy2, wall) == true) {
+       en2y = en2y - 1
+     }
+     if (overlapMulitple(enemy1, enemy2) == true) {
+       en1y = en1y - 1
+     }
+     load();
      wincon()
      death()
    }
@@ -280,6 +285,15 @@ if (overlap(player, exit) == true) {
      getPosition()
      if (overlapMulitple(player, wall) == true) {
        playery = playery + 1
+     }
+     if (overlapMulitple(enemy1, wall) == true) {
+       en1y = en1y + 1
+     }
+     if (overlapMulitple(enemy2, wall) == true) {
+       en2y = en2y + 1
+     }
+     if (overlapMulitple(enemy1, enemy2) == true) {
+       en1y = en1y + 1
      }
      load()
      wincon()
@@ -293,6 +307,15 @@ if (overlap(player, exit) == true) {
      getPosition()
      if (overlapMulitple(player, wall) == true) {
        playerx = playerx + 1
+     }
+     if (overlapMulitple(enemy1, wall) == true) {
+       en1x = en1x + 1
+     }
+     if (overlapMulitple(enemy2, wall) == true) {
+       en2x = en2x + 1
+     }
+     if (overlapMulitple(enemy1, enemy2) == true) {
+       en1x = en1x + 1
      }
      let el = document.querySelector("div")
      clearElement(el)
@@ -311,7 +334,15 @@ if (overlap(player, exit) == true) {
      if (overlapMulitple(player, wall) == true) {
        playerx = playerx - 1
      }
-     let el = document.querySelector("div")
+     if (overlapMulitple(enemy1, wall) == true) {
+       en1x = en1x - 1
+     }
+     if (overlapMulitple(enemy2, wall) == true) {
+       en2x = en2x - 1
+     }
+     if (overlapMulitple(enemy1, enemy2) == true) {
+       en1x = en1x - 1
+     }
      load()
      wincon()
      death()
