@@ -230,9 +230,11 @@ if (overlap(player, exit) == true) {
   let text = document.createElement("p")
   text.textContent = "HOT SUPER"
   text.setAttribute("class", "win")
-  let winmsg = document.body.
+  let winmsg = document.body.querySelector('#winmsg')
+  console.log(winmsg)
   winmsg.appendChild(text)
  }
+}
  const death = function() {
    getPosition()
    if (overlapMulitple(player, enemy1) == true || overlapMulitple(player, enemy2) == true) {
@@ -481,4 +483,6 @@ if (overlap(player, exit) == true) {
    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
    display.syncState(State.start(simpleLevel));
    window.addEventListener("keydown", keys)
+   let winmsg = document.body.querySelector('#winmsg')
+   clearElement(winmsg)
  });
