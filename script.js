@@ -1,8 +1,8 @@
  let testLevel = `
 #########
-#@..#%.^#
+#@..#1.^#
 #.......#
-#...#..%#
+#...#..2#
 #########`;
 
  var Level = class Level {
@@ -70,22 +70,39 @@
 
  Player.prototype.size = new Vec(1, 1);
 
- var Enemy = class Enemy {
+ var Enemy1 = class Enemy1 {
    constructor(pos) {
      this.pos = pos;
    }
 
    get type() {
-     return "enemy";
+     return "enemy1";
    }
 
    static create(pos) {
-     return new Enemy(pos.plus(new Vec(enx, eny)),
+     return new Enemy1(pos.plus(new Vec(en1x, en1y)),
        new Vec(0, 0));
    }
  }
 
- Enemy.prototype.size = new Vec(1, 1);
+ Enemy1.prototype.size = new Vec(1, 1);
+
+ var Enemy2 = class Enemy2 {
+   constructor(pos) {
+     this.pos = pos;
+   }
+
+   get type() {
+     return "enemy2";
+   }
+
+   static create(pos) {
+     return new Enemy2(pos.plus(new Vec(en2x, en2y)),
+       new Vec(0, 0));
+   }
+ }
+
+ Enemy2.prototype.size = new Vec(1, 1);
 
  var Exit = class Exit {
    constructor(pos) {
@@ -124,7 +141,8 @@
  var entities = {
    ".": "empty",
    "#": Wall,
-   "%": Enemy,
+   "1": Enemy1,
+   "2": Enemy2,
    "@": Player,
    "^": Exit
  };
@@ -182,51 +200,68 @@
      return rect;
    }));
  }
+
  let playerx = 0
  let playery = 0
- let enx = 0
- let eny = 0
+ let en1x = 0
+ let en1y = 0
+ let en2x = 0
+ let en2y = 0
+
+ function resetPositions() {
+   playerx = 0
+   playery = 0
+   en1x = 0
+   en1y = 0
+   en2x = 0
+   en2y = 0
+ }
+
+ resetPositions();
+
  const clearElement = (element) => {
    while (element.firstChild) {
      element.removeChild(element.firstChild);
    }
  };
- const wincon= function(){
- getPosition()
- if (overlap(player, exit) == true) {
-   let text = document.createElement("p")
-   text.textContent = "HOT SUPER"
-   text.setAttribute("class", "win")
-   document.body.appendChild(text)
+ const wincon = function() {
+   getPosition()
+   if (overlap(player, exit) == true) {
+     let text = document.createElement("p")
+     text.textContent = "HOT SUPER"
+     text.setAttribute("class", "win")
+     document.body.appendChild(text)
+   }
  }
-}
-const death = function(){
-  getPosition()
-  if (overlapMulitple(player,enemy) == true) {
-    window.removeEventListener("keydown",keys)
-  let text = document.createElement("p")
-  text.textContent = "SQUISH"
-  text.setAttribute("class", "looser")
-  document.body.appendChild(text)
-}
-}
-const load = function() {
-  let el = document.querySelector("div")
-  clearElement(el)
-  let simpleLevel = new Level(testLevel);
-  let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-  display.syncState(State.start(simpleLevel));
-}
+ const death = function() {
+   getPosition()
+   if (overlapMulitple(player, enemy1) == true || overlapMulitple(player, enemy2) == true) {
+     window.removeEventListener("keydown", keys)
+     let text = document.createElement("p")
+     text.textContent = "SQUISH"
+     text.setAttribute("class", "looser")
+     document.body.appendChild(text)
+   }
+ }
+ const load = function() {
+   let el = document.querySelector("div")
+   clearElement(el)
+   let simpleLevel = new Level(testLevel);
+   let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+   display.syncState(State.start(simpleLevel));
+ }
  window.addEventListener("keydown", keys)
-function keys(){
+
+ function keys() {
    if (event.key == "s") {
      playery = playery + 1
-     eny = eny + 1
+     en1y = en1y + 1
+     en2y = en2y + 1
      load()
      getPosition()
-   if (overlapMulitple(player,wall) == true){
-      playery = playery - 1
-   }
+     if (overlapMulitple(player, wall) == true) {
+       playery = playery - 1
+     }
      let el = document.querySelector("div")
      clearElement(el)
      let simpleLevel = new Level(testLevel);
@@ -237,11 +272,12 @@ function keys(){
    }
    if (event.key == "w") {
      playery = playery - 1
-     eny = eny - 1
+     en1y = en1y - 1
+     en2y = en2y - 1
      load()
      getPosition()
-     if (overlapMulitple(player,wall) == true){
-        playery = playery + 1
+     if (overlapMulitple(player, wall) == true) {
+       playery = playery + 1
      }
      load()
      wincon()
@@ -249,10 +285,11 @@ function keys(){
    }
    if (event.key == "a") {
      playerx = playerx - 1
-     enx = enx - 1
+     en1x = en1x - 1
+     en2x = en2x - 1
      load()
      getPosition()
-     if (overlapMulitple(player,wall)==true){
+     if (overlapMulitple(player, wall) == true) {
        playerx = playerx + 1
      }
      let el = document.querySelector("div")
@@ -261,14 +298,15 @@ function keys(){
      let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
      display.syncState(State.start(simpleLevel));
      wincon()
-      death()
+     death()
    }
    if (event.key == "d") {
      playerx = playerx + 1
-     enx = enx + 1
+     en1x = en1x + 1
+     en2x = en2x + 1
      load()
      getPosition()
-     if (overlapMulitple(player,wall)==true){
+     if (overlapMulitple(player, wall) == true) {
        playerx = playerx - 1
      }
      let el = document.querySelector("div")
@@ -277,9 +315,10 @@ function keys(){
      death()
    }
  }
- window.addEventListener("keydown", event =>{
+ window.addEventListener("keydown", event => {
    if (event.key == "ArrowDown") {
-     eny = eny + 1
+     en1y = en1y + 1
+     en2y = en2y + 1
      let el = document.querySelector("div")
      clearElement(el)
      let simpleLevel = new Level(testLevel);
@@ -290,7 +329,8 @@ function keys(){
  })
  window.addEventListener("keydown", event => {
    if (event.key == "ArrowUp") {
-     eny = eny - 1
+     en1y = en1y - 1
+     en2y = en2y - 1
      let el = document.querySelector("div")
      clearElement(el)
      let simpleLevel = new Level(testLevel);
@@ -301,7 +341,8 @@ function keys(){
  })
  window.addEventListener("keydown", event => {
    if (event.key == "ArrowLeft") {
-     enx = enx - 1
+     en1x = en1x - 1
+     en2x = en2x - 1
      let el = document.querySelector("div")
      clearElement(el)
      let simpleLevel = new Level(testLevel);
@@ -312,7 +353,8 @@ function keys(){
  })
  window.addEventListener("keydown", event => {
    if (event.key == "ArrowRight") {
-     enx = enx + 1
+     en1x = en1x + 1
+     en2x = en2x + 1
      let el = document.querySelector("div")
      clearElement(el)
      let simpleLevel = new Level(testLevel);
@@ -339,7 +381,8 @@ function keys(){
 
  function getPosition() {
    player = document.body.querySelector(".player");
-   enemy = document.body.querySelectorAll(".enemy");
+   enemy1 = document.body.querySelectorAll(".enemy1");
+   enemy2 = document.body.querySelectorAll(".enemy2");
    wall = document.body.querySelectorAll(".wall");
    exit = document.body.querySelector(".exit");
  }
@@ -395,16 +438,10 @@ function keys(){
  display.syncState(State.start(simpleLevel));
  let resetb = document.body.querySelector("button")
 
- let player = document.body.querySelector(".player");
- let enemy = document.body.querySelectorAll(".enemy");
- let wall = document.body.querySelectorAll(".wall");
- let exit = document.body.querySelector(".exit");
+ getPosition();
 
  resetb.addEventListener("click", event => {
-   playerx = 0
-   playery = 0
-   enx = 0
-   eny = 0
+   resetPositions();
    let el = document.querySelector("div")
    clearElement(el)
    let simpleLevel = new Level(testLevel);
