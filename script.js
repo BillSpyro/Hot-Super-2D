@@ -224,17 +224,17 @@
      element.removeChild(element.firstChild);
    }
  };
-const wincon= function(){
-getPosition()
-if (overlap(player, exit) == true) {
-  let text = document.createElement("p")
-  text.textContent = "HOT SUPER"
-  text.setAttribute("class", "win")
-  let winmsg = document.body.querySelector('#winmsg')
-  console.log(winmsg)
-  winmsg.appendChild(text)
+ const wincon = function() {
+   getPosition()
+   if (overlap(player, exit) == true) {
+     let text = document.createElement("p")
+     text.textContent = "HOT SUPER"
+     text.setAttribute("class", "win")
+     let winmsg = document.body.querySelector('#winmsg')
+     console.log(winmsg)
+     winmsg.appendChild(text)
+   }
  }
-}
  const death = function() {
    getPosition()
    if (overlapMulitple(player, enemy1) == true || overlapMulitple(player, enemy2) == true) {
@@ -272,6 +272,12 @@ if (overlap(player, exit) == true) {
      if (overlapMulitple(enemy2, wall) == true) {
        en2y = en2y - 1
      }
+     if (overlapMulitple(enemy1, exit) == true) {
+       en1y = en1y - 1
+     }
+     if (overlapMulitple(enemy2, exit) == true) {
+       en2y = en2y - 1
+     }
      if (overlapMulitple(enemy1, enemy2) == true) {
        en1y = en1y - 1
      }
@@ -292,6 +298,12 @@ if (overlap(player, exit) == true) {
        en1y = en1y + 1
      }
      if (overlapMulitple(enemy2, wall) == true) {
+       en2y = en2y + 1
+     }
+     if (overlapMulitple(enemy1, exit) == true) {
+       en1y = en1y + 1
+     }
+     if (overlapMulitple(enemy2, exit) == true) {
        en2y = en2y + 1
      }
      if (overlapMulitple(enemy1, enemy2) == true) {
@@ -316,14 +328,18 @@ if (overlap(player, exit) == true) {
      if (overlapMulitple(enemy2, wall) == true) {
        en2x = en2x + 1
      }
+     if (overlapMulitple(enemy1, exit) == true) {
+       en1x = en1x + 1
+     }
+     if (overlapMulitple(enemy2, exit) == true) {
+       en2x = en2x + 1
+     }
      if (overlapMulitple(enemy1, enemy2) == true) {
        en1x = en1x + 1
      }
      let el = document.querySelector("div")
      clearElement(el)
-     let simpleLevel = new Level(testLevel);
-     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-     display.syncState(State.start(simpleLevel));
+     load()
      wincon()
      death()
    }
@@ -342,6 +358,12 @@ if (overlap(player, exit) == true) {
      if (overlapMulitple(enemy2, wall) == true) {
        en2x = en2x - 1
      }
+     if (overlapMulitple(enemy1, exit) == true) {
+       en1x = en1x - 1
+     }
+     if (overlapMulitple(enemy2, exit) == true) {
+       en2x = en2x - 1
+     }
      if (overlapMulitple(enemy1, enemy2) == true) {
        en1x = en1x - 1
      }
@@ -356,9 +378,7 @@ if (overlap(player, exit) == true) {
      en2y = en2y + 1
      let el = document.querySelector("div")
      clearElement(el)
-     let simpleLevel = new Level(testLevel);
-     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-     display.syncState(State.start(simpleLevel));
+     load()
      death()
    }
  })
@@ -366,11 +386,7 @@ if (overlap(player, exit) == true) {
    if (event.key == "ArrowUp") {
      en1y = en1y - 1
      en2y = en2y - 1
-     let el = document.querySelector("div")
-     clearElement(el)
-     let simpleLevel = new Level(testLevel);
-     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-     display.syncState(State.start(simpleLevel));
+     load()
      death()
    }
  })
@@ -378,11 +394,7 @@ if (overlap(player, exit) == true) {
    if (event.key == "ArrowLeft") {
      en1x = en1x - 1
      en2x = en2x - 1
-     let el = document.querySelector("div")
-     clearElement(el)
-     let simpleLevel = new Level(testLevel);
-     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-     display.syncState(State.start(simpleLevel));
+     load()
      death()
    }
  })
@@ -390,11 +402,7 @@ if (overlap(player, exit) == true) {
    if (event.key == "ArrowRight") {
      en1x = en1x + 1
      en2x = en2x + 1
-     let el = document.querySelector("div")
-     clearElement(el)
-     let simpleLevel = new Level(testLevel);
-     let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
-     display.syncState(State.start(simpleLevel));
+     load()
      death()
    }
  })
