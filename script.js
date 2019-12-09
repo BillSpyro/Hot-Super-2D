@@ -242,7 +242,7 @@ if (overlap(player, exit) == true) {
      text.textContent = "SQUISH"
      text.setAttribute("class", "looser")
      let winmsg = document.body.querySelector('#winmsg')
-     winmsg.appendChild(text)
+     winmsgw.appendChild(text)
    }
  }
  const load = function() {
