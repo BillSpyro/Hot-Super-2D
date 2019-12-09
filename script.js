@@ -1,18 +1,23 @@
- let testLevel =[ `
+ let testLevel = [`
 #########
 #@..#1.^#
 #.......#
 #...#..2#
-#########`
-,
-`
+#########`,
+   `
 #########
 #@.1#..^#
 #.......#
 #2..#...#
-#########`]
-;
-let levelNumber = 0
+#########`,
+   `
+#########
+#@..#1.^#
+#.......#
+#...#3.2#
+#########`
+ ];
+ let levelNumber = 0
  var Level = class Level {
    constructor(plan) {
      let rows = plan.trim().split("\n").map(l => [...l]);
@@ -112,6 +117,23 @@ let levelNumber = 0
 
  Enemy2.prototype.size = new Vec(1, 1);
 
+ var Enemy3 = class Enemy3 {
+   constructor(pos) {
+     this.pos = pos;
+   }
+
+   get type() {
+     return "enemy3";
+   }
+
+   static create(pos) {
+     return new Enemy3(pos.plus(new Vec(en3x, en3y)),
+       new Vec(0, 0));
+   }
+ }
+
+ Enemy3.prototype.size = new Vec(1, 1);
+
  var Exit = class Exit {
    constructor(pos) {
      this.pos = pos;
@@ -151,6 +173,7 @@ let levelNumber = 0
    "#": Wall,
    "1": Enemy1,
    "2": Enemy2,
+   "3": Enemy3,
    "@": Player,
    "^": Exit
  };
@@ -215,6 +238,8 @@ let levelNumber = 0
  let en1y = 0
  let en2x = 0
  let en2y = 0
+ let en3x = 0
+ let en3y = 0
 
  function resetPositions() {
    playerx = 0
@@ -223,6 +248,8 @@ let levelNumber = 0
    en1y = 0
    en2x = 0
    en2y = 0
+   en3x = 0
+   en3y = 0
  }
 
  resetPositions();
@@ -256,7 +283,9 @@ let levelNumber = 0
  }
  const death = function() {
    getPosition()
-   if (overlapMulitple(player, enemy1) == true || overlapMulitple(player, enemy2) == true) {
+   if (overlapMulitple(player, enemy1) == true ||
+     overlapMulitple(player, enemy2) == true ||
+     overlapMulitple(player, enemy3) == true) {
      window.removeEventListener("keydown", keys)
      let text = document.createElement("p")
      text.textContent = "SQUISH"
@@ -279,27 +308,31 @@ let levelNumber = 0
      playery = playery + 1
      en1y = en1y + 1
      en2y = en2y + 1
+     en3y = en3y + 1
      load()
      getPosition()
-     if (overlapMulitple(player, wall) == true) {
+     if (overlapMulitple(player, wall)) {
        playery = playery - 1
      }
-     if (overlapMulitple(enemy1, wall) == true) {
+     if (overlapMulitple(enemy1, wall) || overlapMulitple(enemy1, exit)) {
        en1y = en1y - 1
      }
-     if (overlapMulitple(enemy2, wall) == true) {
+     if (overlapMulitple(enemy2, wall) || overlapMulitple(enemy2, exit)) {
        en2y = en2y - 1
      }
-     if (overlapMulitple(enemy1, exit) == true) {
-       en1y = en1y - 1
-     }
-     if (overlapMulitple(enemy2, exit) == true) {
-       en2y = en2y - 1
+     if (overlapMulitple(enemy3, wall) || overlapMulitple(enemy3, exit)) {
+       en3y = en3y - 1
      }
      load()
      getPosition()
-     if (overlapMulitple(enemy1, enemy2) == true) {
+     if (overlapMulitple(enemy1, enemy2)) {
        en1y = en1y - 1
+     }
+     if (overlapMulitple(enemy1, enemy3)) {
+       en1y = en1y - 1
+     }
+     if (overlapMulitple(enemy2, enemy3)) {
+       en2y = en2y - 1
      }
      load();
      wincon()
@@ -309,27 +342,31 @@ let levelNumber = 0
      playery = playery - 1
      en1y = en1y - 1
      en2y = en2y - 1
+     en3y = en3y - 1
      load()
      getPosition()
-     if (overlapMulitple(player, wall) == true) {
+     if (overlapMulitple(player, wall)) {
        playery = playery + 1
      }
-     if (overlapMulitple(enemy1, wall) == true) {
+     if (overlapMulitple(enemy1, wall) || overlapMulitple(enemy1, exit)) {
        en1y = en1y + 1
      }
-     if (overlapMulitple(enemy2, wall) == true) {
+     if (overlapMulitple(enemy2, wall) || overlapMulitple(enemy2, exit)) {
        en2y = en2y + 1
      }
-     if (overlapMulitple(enemy1, exit) == true) {
-       en1y = en1y + 1
-     }
-     if (overlapMulitple(enemy2, exit) == true) {
-       en2y = en2y + 1
+     if (overlapMulitple(enemy3, wall) || overlapMulitple(enemy3, exit)) {
+       en3y = en3y + 1
      }
      load()
      getPosition()
-     if (overlapMulitple(enemy1, enemy2) == true) {
+     if (overlapMulitple(enemy1, enemy2)) {
        en1y = en1y + 1
+     }
+     if (overlapMulitple(enemy1, enemy3)) {
+       en1y = en1y + 1
+     }
+     if (overlapMulitple(enemy2, enemy3)) {
+       en2y = en2y + 1
      }
      load()
      wincon()
@@ -339,27 +376,31 @@ let levelNumber = 0
      playerx = playerx - 1
      en1x = en1x - 1
      en2x = en2x - 1
+     en3x = en3x - 1
      load()
      getPosition()
-     if (overlapMulitple(player, wall) == true) {
+     if (overlapMulitple(player, wall)) {
        playerx = playerx + 1
      }
-     if (overlapMulitple(enemy1, wall) == true) {
+     if (overlapMulitple(enemy1, wall) || overlapMulitple(enemy1, exit)) {
        en1x = en1x + 1
      }
-     if (overlapMulitple(enemy2, wall) == true) {
+     if (overlapMulitple(enemy2, wall) || overlapMulitple(enemy2, exit)) {
        en2x = en2x + 1
      }
-     if (overlapMulitple(enemy1, exit) == true) {
-       en1x = en1x + 1
-     }
-     if (overlapMulitple(enemy2, exit) == true) {
-       en2x = en2x + 1
+     if (overlapMulitple(enemy3, wall) || overlapMulitple(enemy3, exit)) {
+       en3x = en3x + 1
      }
      load()
      getPosition()
-     if (overlapMulitple(enemy1, enemy2) == true) {
+     if (overlapMulitple(enemy1, enemy2)) {
        en1x = en1x + 1
+     }
+     if (overlapMulitple(enemy1, enemy3)) {
+       en1x = en1x + 1
+     }
+     if (overlapMulitple(enemy2, enemy3)) {
+       en2x = en2x + 1
      }
      load()
      wincon()
@@ -369,27 +410,31 @@ let levelNumber = 0
      playerx = playerx + 1
      en1x = en1x + 1
      en2x = en2x + 1
+     en3x = en3x + 1
      load()
      getPosition()
-     if (overlapMulitple(player, wall) == true) {
+     if (overlapMulitple(player, wall)) {
        playerx = playerx - 1
      }
-     if (overlapMulitple(enemy1, wall) == true) {
+     if (overlapMulitple(enemy1, wall) || overlapMulitple(enemy1, exit)) {
        en1x = en1x - 1
      }
-     if (overlapMulitple(enemy2, wall) == true) {
+     if (overlapMulitple(enemy2, wall) || overlapMulitple(enemy2, exit)) {
        en2x = en2x - 1
      }
-     if (overlapMulitple(enemy1, exit) == true) {
-       en1x = en1x - 1
-     }
-     if (overlapMulitple(enemy2, exit) == true) {
-       en2x = en2x - 1
+     if (overlapMulitple(enemy3, wall) || overlapMulitple(enemy3, exit)) {
+       en3x = en3x - 1
      }
      load()
      getPosition()
-     if (overlapMulitple(enemy1, enemy2) == true) {
+     if (overlapMulitple(enemy1, enemy2)) {
        en1x = en1x - 1
+     }
+     if (overlapMulitple(enemy1, enemy3)) {
+       en1x = en1x - 1
+     }
+     if (overlapMulitple(enemy2, enemy3)) {
+       en2x = en2x - 1
      }
      load()
      wincon()
@@ -400,6 +445,7 @@ let levelNumber = 0
    if (event.key == "ArrowDown") {
      en1y = en1y + 1
      en2y = en2y + 1
+     en3y = en3y + 1
      load()
      death()
    }
@@ -408,6 +454,7 @@ let levelNumber = 0
    if (event.key == "ArrowUp") {
      en1y = en1y - 1
      en2y = en2y - 1
+     en3y = en3y - 1
      load()
      death()
    }
@@ -416,6 +463,7 @@ let levelNumber = 0
    if (event.key == "ArrowLeft") {
      en1x = en1x - 1
      en2x = en2x - 1
+     en3x = en3x - 1
      load()
      death()
    }
@@ -424,6 +472,7 @@ let levelNumber = 0
    if (event.key == "ArrowRight") {
      en1x = en1x + 1
      en2x = en2x + 1
+     en3x = en3x + 1
      load()
      death()
    }
@@ -444,6 +493,7 @@ let levelNumber = 0
    player = document.body.querySelector(".player");
    enemy1 = document.body.querySelectorAll(".enemy1");
    enemy2 = document.body.querySelectorAll(".enemy2");
+   enemy3 = document.body.querySelectorAll(".enemy3");
    wall = document.body.querySelectorAll(".wall");
    exit = document.body.querySelector(".exit");
  }
