@@ -240,9 +240,18 @@ let levelNumber = 0
      text.setAttribute("class", "win")
      let winmsg = document.body.querySelector('#winmsg')
      winmsg.appendChild(text)
-     levelNumber= levelNumber + 1
-     resetPositions()
-     load()
+     let button = document.createElement("button")
+     button.textContent = "Next Level"
+     button.setAttribute("class", "win")
+     winmsg.appendChild(button)
+     let nlbutton = winmsg.querySelector('button')
+     nlbutton.addEventListener("click" , levelnext)
+     function levelnext() {
+       levelNumber= levelNumber + 1
+       resetPositions()
+       load()
+       clearElement(winmsg)
+     }
    }
  }
  const death = function() {
@@ -262,8 +271,6 @@ let levelNumber = 0
    let simpleLevel = new Level(testLevel[levelNumber]);
    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
    display.syncState(State.start(simpleLevel));
-
-
  }
  window.addEventListener("keydown", keys)
 
