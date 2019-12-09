@@ -224,14 +224,14 @@
      element.removeChild(element.firstChild);
    }
  };
- const wincon = function() {
-   getPosition()
-   if (overlap(player, exit) == true) {
-     let text = document.createElement("p")
-     text.textContent = "HOT SUPER"
-     text.setAttribute("class", "win")
-     document.body.appendChild(text)
-   }
+const wincon= function(){
+getPosition()
+if (overlap(player, exit) == true) {
+  let text = document.createElement("p")
+  text.textContent = "HOT SUPER"
+  text.setAttribute("class", "win")
+  let winmsg = document.body.
+  winmsg.appendChild(text)
  }
  const death = function() {
    getPosition()
@@ -249,6 +249,8 @@
    let simpleLevel = new Level(testLevel);
    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
    display.syncState(State.start(simpleLevel));
+
+
  }
  window.addEventListener("keydown", keys)
 
