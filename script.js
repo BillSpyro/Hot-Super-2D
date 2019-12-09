@@ -262,6 +262,7 @@
  const wincon = function() {
    getPosition()
    if (overlap(player, exit) == true) {
+     window.removeEventListener("keydown", keys)
      let text = document.createElement("p")
      text.textContent = "HOT SUPER"
      text.setAttribute("class", "win")
@@ -278,6 +279,7 @@
        resetPositions()
        load()
        clearElement(winmsg)
+       window.addEventListener("keydown", keys)
      }
    }
  }
