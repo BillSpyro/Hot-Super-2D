@@ -1,10 +1,18 @@
- let testLevel = `
+ let testLevel =[ `
 #########
 #@..#1.^#
 #.......#
 #...#..2#
-#########`;
-
+#########`
+,
+`
+#########
+#@.1#..^#
+#.......#
+#2..#...#
+#########`]
+;
+let levelNumber = 0
  var Level = class Level {
    constructor(plan) {
      let rows = plan.trim().split("\n").map(l => [...l]);
@@ -232,6 +240,9 @@
      text.setAttribute("class", "win")
      let winmsg = document.body.querySelector('#winmsg')
      winmsg.appendChild(text)
+     levelNumber= levelNumber + 1
+     resetPositions()
+     load()
    }
  }
  const death = function() {
@@ -248,7 +259,7 @@
  const load = function() {
    let el = document.querySelector("div")
    clearElement(el)
-   let simpleLevel = new Level(testLevel);
+   let simpleLevel = new Level(testLevel[levelNumber]);
    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
    display.syncState(State.start(simpleLevel));
 
@@ -476,7 +487,7 @@
    }
  }
 
- let simpleLevel = new Level(testLevel);
+ let simpleLevel = new Level(testLevel[levelNumber]);
  let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
  display.syncState(State.start(simpleLevel));
  let resetb = document.body.querySelector("button")
@@ -487,7 +498,7 @@
    resetPositions();
    let el = document.querySelector("div")
    clearElement(el)
-   let simpleLevel = new Level(testLevel);
+   let simpleLevel = new Level(testLevel[levelNumber]);
    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
    display.syncState(State.start(simpleLevel));
    window.addEventListener("keydown", keys)
