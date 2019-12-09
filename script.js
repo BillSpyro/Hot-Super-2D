@@ -269,7 +269,7 @@
      winmsg.appendChild(text)
      let button = document.createElement("button")
      button.textContent = "Next Level"
-     button.setAttribute("class", "win")
+     button.setAttribute("class", "next")
      winmsg.appendChild(button)
      let nlbutton = winmsg.querySelector('button')
      nlbutton.addEventListener("click" , levelnext)
