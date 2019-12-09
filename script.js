@@ -334,6 +334,7 @@
  const wincon = function() {
    getPosition()
    if (overlap(player, exit) == true) {
+     if (levelNumber !=2){
      window.removeEventListener("keydown", keys)
      let text = document.createElement("p")
      text.textContent = "HOT SUPER"
@@ -354,6 +355,20 @@
        clearElement(winmsg)
        window.addEventListener("keydown", keys)
      }
+   }else {
+      window.removeEventListener("keydown", keys)
+      let el = document.querySelector("div")
+      clearElement(el)
+      let text = document.createElement("p")
+      text.textContent = "Congradulations you won"
+      text.setAttribute("class", "win")
+      let winmsg = document.body.querySelector('#winmsg')
+      winmsg.appendChild(text)
+      let under = document.createElement("p")
+      under.textContent = "took you long enough"
+      under.setAttribute("class", "win")
+      winmsg.appendChild(under)
+   }
    }
  }
  const death = function() {
@@ -720,14 +735,11 @@
 
    }
  }
-
  let simpleLevel = new Level(testLevel[levelNumber]);
  let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
  display.syncState(State.start(simpleLevel));
  let resetb = document.body.querySelector("button")
-
  getPosition();
-
  resetb.addEventListener("click", event => {
    resetPositions();
    let el = document.querySelector("div")
