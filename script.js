@@ -15,6 +15,12 @@
 #@..#1.^#
 #.......#
 #...#3.2#
+#########`,
+   `
+#########
+#@..#4.^#
+#.......#
+#...#..5#
 #########`
  ];
  let levelNumber = 0
@@ -134,6 +140,57 @@
 
  Enemy3.prototype.size = new Vec(1, 1);
 
+ var OppositeEnemy1 = class OppositeEnemy1 {
+   constructor(pos) {
+     this.pos = pos;
+   }
+
+   get type() {
+     return "oppositeEnemy1";
+   }
+
+   static create(pos) {
+     return new OppositeEnemy1(pos.plus(new Vec(oEn1x, oEn1y)),
+       new Vec(0, 0));
+   }
+ }
+
+ OppositeEnemy1.prototype.size = new Vec(1, 1);
+
+ var OppositeEnemy2 = class OppositeEnemy2 {
+   constructor(pos) {
+     this.pos = pos;
+   }
+
+   get type() {
+     return "oppositeEnemy2";
+   }
+
+   static create(pos) {
+     return new OppositeEnemy2(pos.plus(new Vec(oEn2x, oEn2y)),
+       new Vec(0, 0));
+   }
+ }
+
+ OppositeEnemy2.prototype.size = new Vec(1, 1);
+
+ var OppositeEnemy3 = class OppositeEnemy3 {
+   constructor(pos) {
+     this.pos = pos;
+   }
+
+   get type() {
+     return "oppositeEnemy3";
+   }
+
+   static create(pos) {
+     return new OppositeEnemy3(pos.plus(new Vec(oEn3x, oEn3y)),
+       new Vec(0, 0));
+   }
+ }
+
+ OppositeEnemy3.prototype.size = new Vec(1, 1);
+
  var Exit = class Exit {
    constructor(pos) {
      this.pos = pos;
@@ -174,6 +231,9 @@
    "1": Enemy1,
    "2": Enemy2,
    "3": Enemy3,
+   "4": OppositeEnemy1,
+   "5": OppositeEnemy2,
+   "6": OppositeEnemy3,
    "@": Player,
    "^": Exit
  };
@@ -240,6 +300,12 @@
  let en2y = 0
  let en3x = 0
  let en3y = 0
+ let oEn1x = 0
+ let oEn1y = 0
+ let oEn2x = 0
+ let oEn2y = 0
+ let oEn3x = 0
+ let oEn3y = 0
 
  function resetPositions() {
    playerx = 0
@@ -250,6 +316,12 @@
    en2y = 0
    en3x = 0
    en3y = 0
+   oEn1x = 0
+   oEn1y = 0
+   oEn2x = 0
+   oEn2y = 0
+   oEn3x = 0
+   oEn3y = 0
  }
 
  resetPositions();
@@ -273,9 +345,10 @@
      button.setAttribute("class", "next")
      winmsg.appendChild(button)
      let nlbutton = winmsg.querySelector('button')
-     nlbutton.addEventListener("click" , levelnext)
+     nlbutton.addEventListener("click", levelnext)
+
      function levelnext() {
-       levelNumber= levelNumber + 1
+       levelNumber = levelNumber + 1
        resetPositions()
        load()
        clearElement(winmsg)
@@ -287,7 +360,10 @@
    getPosition()
    if (overlapMulitple(player, enemy1) == true ||
      overlapMulitple(player, enemy2) == true ||
-     overlapMulitple(player, enemy3) == true) {
+     overlapMulitple(player, enemy3) == true ||
+     overlapMulitple(player, oppositeEnemy1) == true ||
+     overlapMulitple(player, oppositeEnemy2) == true ||
+     overlapMulitple(player, oppositeEnemy3) == true) {
      window.removeEventListener("keydown", keys)
      let text = document.createElement("p")
      text.textContent = "SQUISH"
@@ -311,6 +387,9 @@
      en1y = en1y + 1
      en2y = en2y + 1
      en3y = en3y + 1
+     oEn1y = oEn1y - 1
+     oEn2y = oEn2y - 1
+     oEn3y = oEn3y - 1
      load()
      getPosition()
      if (overlapMulitple(player, wall)) {
@@ -325,6 +404,15 @@
      if (overlapMulitple(enemy3, wall) || overlapMulitple(enemy3, exit)) {
        en3y = en3y - 1
      }
+     if (overlapMulitple(oppositeEnemy1, wall) || overlapMulitple(oppositeEnemy1, exit)) {
+       oEn1y = oEn1y + 1
+     }
+     if (overlapMulitple(oppositeEnemy2, wall) || overlapMulitple(oppositeEnemy2, exit)) {
+       oEn2y = oEn2y + 1
+     }
+     if (overlapMulitple(oppositeEnemy3, wall) || overlapMulitple(oppositeEnemy3, exit)) {
+       oEn3y = oEn3y + 1
+     }
      load()
      getPosition()
      if (overlapMulitple(enemy1, enemy2)) {
@@ -336,6 +424,15 @@
      if (overlapMulitple(enemy2, enemy3)) {
        en2y = en2y - 1
      }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
+       oEn1y = oEn1y + 1
+     }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy3)) {
+       oEn1y = oEn1y + 1
+     }
+     if (overlapMulitple(oppositeEnemy2, oppositeEnemy3)) {
+       oEn2y = oEn2y + 1
+     }
      load();
      wincon()
      death()
@@ -345,6 +442,9 @@
      en1y = en1y - 1
      en2y = en2y - 1
      en3y = en3y - 1
+     oEn1y = oEn1y + 1
+     oEn2y = oEn2y + 1
+     oEn3y = oEn3y + 1
      load()
      getPosition()
      if (overlapMulitple(player, wall)) {
@@ -359,6 +459,15 @@
      if (overlapMulitple(enemy3, wall) || overlapMulitple(enemy3, exit)) {
        en3y = en3y + 1
      }
+     if (overlapMulitple(oppositeEnemy1, wall) || overlapMulitple(oppositeEnemy1, exit)) {
+       oEn1y = oEn1y - 1
+     }
+     if (overlapMulitple(oppositeEnemy2, wall) || overlapMulitple(oppositeEnemy2, exit)) {
+       oEn2y = oEn2y - 1
+     }
+     if (overlapMulitple(oppositeEnemy3, wall) || overlapMulitple(oppositeEnemy3, exit)) {
+       oEn3y = oEn3y - 1
+     }
      load()
      getPosition()
      if (overlapMulitple(enemy1, enemy2)) {
@@ -370,6 +479,15 @@
      if (overlapMulitple(enemy2, enemy3)) {
        en2y = en2y + 1
      }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
+       oEn1y = oEn1y - 1
+     }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy3)) {
+       oEn1y = oEn1y - 1
+     }
+     if (overlapMulitple(oppositeEnemy2, oppositeEnemy3)) {
+       oEn2y = oEn2y - 1
+     }
      load()
      wincon()
      death()
@@ -379,6 +497,9 @@
      en1x = en1x - 1
      en2x = en2x - 1
      en3x = en3x - 1
+     oEn1x = oEn1x + 1
+     oEn2x = oEn2x + 1
+     oEn3x = oEn3x + 1
      load()
      getPosition()
      if (overlapMulitple(player, wall)) {
@@ -393,6 +514,15 @@
      if (overlapMulitple(enemy3, wall) || overlapMulitple(enemy3, exit)) {
        en3x = en3x + 1
      }
+     if (overlapMulitple(oppositeEnemy1, wall) || overlapMulitple(oppositeEnemy1, exit)) {
+       oEn1x = oEn1x - 1
+     }
+     if (overlapMulitple(oppositeEnemy2, wall) || overlapMulitple(oppositeEnemy2, exit)) {
+       oEn2x = oEn2x - 1
+     }
+     if (overlapMulitple(oppositeEnemy3, wall) || overlapMulitple(oppositeEnemy3, exit)) {
+       oEn3x = oEn3x - 1
+     }
      load()
      getPosition()
      if (overlapMulitple(enemy1, enemy2)) {
@@ -404,6 +534,15 @@
      if (overlapMulitple(enemy2, enemy3)) {
        en2x = en2x + 1
      }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
+       oEn1x = oEn1x - 1
+     }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy3)) {
+       oEn1x = oEn1x - 1
+     }
+     if (overlapMulitple(oppositeEnemy2, oppositeEnemy3)) {
+       oEn2x = oEn2x - 1
+     }
      load()
      wincon()
      death()
@@ -413,6 +552,9 @@
      en1x = en1x + 1
      en2x = en2x + 1
      en3x = en3x + 1
+     oEn1x = oEn1x - 1
+     oEn2x = oEn2x - 1
+     oEn3x = oEn3x - 1
      load()
      getPosition()
      if (overlapMulitple(player, wall)) {
@@ -427,6 +569,15 @@
      if (overlapMulitple(enemy3, wall) || overlapMulitple(enemy3, exit)) {
        en3x = en3x - 1
      }
+     if (overlapMulitple(oppositeEnemy1, wall) || overlapMulitple(oppositeEnemy1, exit)) {
+       oEn1x = oEn1x + 1
+     }
+     if (overlapMulitple(oppositeEnemy2, wall) || overlapMulitple(oppositeEnemy2, exit)) {
+       oEn2x = oEn2x + 1
+     }
+     if (overlapMulitple(oppositeEnemy3, wall) || overlapMulitple(oppositeEnemy3, exit)) {
+       oEn3x = oEn3x + 1
+     }
      load()
      getPosition()
      if (overlapMulitple(enemy1, enemy2)) {
@@ -438,6 +589,15 @@
      if (overlapMulitple(enemy2, enemy3)) {
        en2x = en2x - 1
      }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
+       oEn1x = oEn1x + 1
+     }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy3)) {
+       oEn1x = oEn1x + 1
+     }
+     if (overlapMulitple(oppositeEnemy2, oppositeEnemy3)) {
+       oEn2x = oEn2x + 1
+     }
      load()
      wincon()
      death()
@@ -448,6 +608,9 @@
      en1y = en1y + 1
      en2y = en2y + 1
      en3y = en3y + 1
+     oEn1y = oEn1y - 1
+     oEn2y = oEn2y - 1
+     oEn3y = oEn3y - 1
      load()
      death()
    }
@@ -457,6 +620,9 @@
      en1y = en1y - 1
      en2y = en2y - 1
      en3y = en3y - 1
+     oEn1y = oEn1y + 1
+     oEn2y = oEn2y + 1
+     oEn3y = oEn3y + 1
      load()
      death()
    }
@@ -466,6 +632,9 @@
      en1x = en1x - 1
      en2x = en2x - 1
      en3x = en3x - 1
+     oEn1x = oEn1x + 1
+     oEn2x = oEn2x + 1
+     oEn3x = oEn3x + 1
      load()
      death()
    }
@@ -475,6 +644,9 @@
      en1x = en1x + 1
      en2x = en2x + 1
      en3x = en3x + 1
+     oEn1x = oEn1x - 1
+     oEn2x = oEn2x - 1
+     oEn3x = oEn3x - 1
      load()
      death()
    }
@@ -496,6 +668,9 @@
    enemy1 = document.body.querySelectorAll(".enemy1");
    enemy2 = document.body.querySelectorAll(".enemy2");
    enemy3 = document.body.querySelectorAll(".enemy3");
+   oppositeEnemy1 = document.body.querySelectorAll(".oppositeEnemy1");
+   oppositeEnemy2 = document.body.querySelectorAll(".oppositeEnemy2");
+   oppositeEnemy3 = document.body.querySelectorAll(".oppositeEnemy3");
    wall = document.body.querySelectorAll(".wall");
    exit = document.body.querySelector(".exit");
  }

@@ -20,6 +20,18 @@
   background: red;
 }
 
+.oppositeEnemy1 {
+  background: purple;
+}
+
+.oppositeEnemy2 {
+  background: purple;
+}
+
+.oppositeEnemy3 {
+  background: purple;
+}
+
 .wall {
   background: black;
 }
