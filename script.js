@@ -231,7 +231,6 @@ if (overlap(player, exit) == true) {
   text.textContent = "HOT SUPER"
   text.setAttribute("class", "win")
   let winmsg = document.body.querySelector('#winmsg')
-  console.log(winmsg)
   winmsg.appendChild(text)
  }
 }
@@ -242,7 +241,8 @@ if (overlap(player, exit) == true) {
      let text = document.createElement("p")
      text.textContent = "SQUISH"
      text.setAttribute("class", "looser")
-     document.body.appendChild(text)
+     let winmsg = document.body.querySelector('#winmsg')
+     winmsg.appendChild(text)
    }
  }
  const load = function() {
