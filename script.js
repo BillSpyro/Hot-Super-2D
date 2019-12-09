@@ -278,6 +278,8 @@
      if (overlapMulitple(enemy2, exit) == true) {
        en2y = en2y - 1
      }
+     load()
+     getPosition()
      if (overlapMulitple(enemy1, enemy2) == true) {
        en1y = en1y - 1
      }
@@ -306,6 +308,8 @@
      if (overlapMulitple(enemy2, exit) == true) {
        en2y = en2y + 1
      }
+     load()
+     getPosition()
      if (overlapMulitple(enemy1, enemy2) == true) {
        en1y = en1y + 1
      }
@@ -334,6 +338,8 @@
      if (overlapMulitple(enemy2, exit) == true) {
        en2x = en2x + 1
      }
+     load()
+     getPosition()
      if (overlapMulitple(enemy1, enemy2) == true) {
        en1x = en1x + 1
      }
@@ -362,6 +368,8 @@
      if (overlapMulitple(enemy2, exit) == true) {
        en2x = en2x - 1
      }
+     load()
+     getPosition()
      if (overlapMulitple(enemy1, enemy2) == true) {
        en1x = en1x - 1
      }
@@ -410,10 +418,6 @@
  };
 
  function overlap(actor1, actor2) {
-   console.log("Actor1 Left: " + actor1.style.left);
-   console.log("Actor1 Top: " + actor1.style.top);
-   console.log("Actor2 Left: " + actor2.style.left);
-   console.log("Actor2 Top: " + actor2.style.top);
    return actor1.style.left == actor2.style.left &&
      actor1.style.top == actor2.style.top
  }
