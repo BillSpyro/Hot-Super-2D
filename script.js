@@ -74,6 +74,30 @@
 #@....#
 #######`,
    `
+######
+#!5..#
+##.#.#
+##.#^#
+##.###
+#@.4!#
+######`,
+   `
+#######
+#..^..#
+#..3..#
+#!1.2!#
+#!!.!!#
+#@....#
+#######`,
+   `
+!!!!#!!!!!!!
+!2......#!!!
+!.!!!!!.!!!!
+!....!!....!
+!!!!.!!!!!.!
+!@...#^1...#
+!!!!!!!!!!!!`,
+   `
 ###############
 ######.########
 #...#...#...#.#
@@ -188,6 +212,7 @@
  }
 
  Player.prototype.size = new Vec(1, 1);
+
  var Clone = class Clone {
    constructor(pos) {
      this.pos = pos;
@@ -202,7 +227,26 @@
        new Vec(0, 0));
    }
  }
+
  Clone.prototype.size = new Vec(1, 1);
+
+ var Pit = class Pit {
+   constructor(pos) {
+     this.pos = pos;
+   }
+
+   get type() {
+     return "pit";
+   }
+
+   static create(pos) {
+     return new Pit(pos.plus(new Vec(0, 0)),
+       new Vec(0, 0));
+   }
+ }
+
+ Pit.prototype.size = new Vec(1, 1);
+
  var Enemy1 = class Enemy1 {
    constructor(pos) {
      this.pos = pos;
@@ -350,7 +394,8 @@
    "6": OppositeEnemy3,
    "@": Player,
    "^": Exit,
-   "c": Clone
+   "c": Clone,
+   "!": Pit
  };
 
  function elt(name, attrs, ...children) {
@@ -507,7 +552,8 @@
      overlapMulitple(player, enemy3) == true ||
      overlapMulitple(player, oppositeEnemy1) == true ||
      overlapMulitple(player, oppositeEnemy2) == true ||
-     overlapMulitple(player, oppositeEnemy3) == true) {
+     overlapMulitple(player, oppositeEnemy3) == true ||
+     overlapMulitple(player, pit) == true) {
      window.removeEventListener("keydown", keys)
      let text = document.createElement("p")
      text.textContent = "SQUISH"
@@ -515,13 +561,44 @@
      let winmsg = document.body.querySelector('#winmsg')
      winmsg.appendChild(text)
    }
-   if (clone != null){
-   if (overlapMulitple(clone, enemy1) == true ||
-     overlapMulitple(clone, enemy2) == true ||
-     overlapMulitple(clone, enemy3) == true ||
-     overlapMulitple(clone, oppositeEnemy1) == true ||
-     overlapMulitple(clone, oppositeEnemy2) == true ||
-     overlapMulitple(clone, oppositeEnemy3) == true){
+   if (overlapMulitple(pit, enemy1) == true) {
+     enemy1[0].remove();
+     en1x = 1000
+     en1y = 1000
+   }
+   if (overlapMulitple(pit, enemy2) == true) {
+     enemy2[0].remove();
+     en2x = 1000
+     en2y = 1000
+   }
+   if (overlapMulitple(pit, enemy3) == true) {
+     enemy3[0].remove();
+     en3x = 1000
+     en3y = 1000
+   }
+   if (overlapMulitple(pit, oppositeEnemy1) == true) {
+     oppositeEnemy1[0].remove();
+     oEn1x = 1000
+     oEn1y = 1000
+   }
+   if (overlapMulitple(pit, oppositeEnemy2) == true) {
+     oppositeEnemy2[0].remove();
+     oEn2x = 1000
+     oEn2y = 1000
+   }
+   if (overlapMulitple(pit, oppositeEnemy3) == true) {
+     oppositeEnemy3[0].remove();
+     oEn3x = 1000
+     oEn3y = 1000
+   }
+   if (clone != null) {
+     if (overlapMulitple(clone, enemy1) == true ||
+       overlapMulitple(clone, enemy2) == true ||
+       overlapMulitple(clone, enemy3) == true ||
+       overlapMulitple(clone, oppositeEnemy1) == true ||
+       overlapMulitple(clone, oppositeEnemy2) == true ||
+       overlapMulitple(clone, oppositeEnemy3) == true ||
+       overlapMulitple(clone, pit) == true) {
        window.removeEventListener("keydown", keys)
        let text = document.createElement("p")
        text.textContent = "SQUISH"
@@ -529,8 +606,8 @@
        let winmsg = document.body.querySelector('#winmsg')
        winmsg.appendChild(text)
      }
+   }
  }
-}
  const load = function() {
    let el = document.querySelector("div")
    clearElement(el)
@@ -841,6 +918,7 @@
    wall = document.body.querySelectorAll(".wall");
    exit = document.body.querySelector(".exit");
    clone = document.body.querySelector(".clone");
+   pit = document.body.querySelectorAll(".pit");
  }
 
  function overlapMulitple(actor1, actor2) {

@@ -8,6 +8,10 @@
   padding: 0;
 }
 
+.pit {
+  background: darkgrey;
+}
+
 .enemy1 {
   background: red;
   border-radius: 100%
