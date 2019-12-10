@@ -1,5 +1,4 @@
- let testLevel = [
-`
+ let oldTestLevel = [`
 #########
 #@..#1.^#
 #.......#
@@ -30,6 +29,95 @@
 #.......#
 #...#3.2#
 #########`,
+   `
+#########
+#@..#4.^#
+#.......#
+#...#..5#
+#########`
+ ];
+
+ let testLevel = [`
+#####
+#..^#
+#...#
+#@..#
+#####`,
+   `
+#####
+#..^#
+#.1.#
+#@..#
+#####`,
+   `
+####
+#^##
+#..#
+#1##
+#.##
+#@##
+####`,
+   `
+####
+#^##
+#..#
+#4##
+#.##
+#@##
+####`,
+   `
+#####
+#1.^#
+#...#
+#.#.#
+#@.2#
+#####`,
+   `
+#####
+#1.^#
+#..3#
+#.#.#
+#@.2#
+#####`,
+   `
+#######
+#.1^2.#
+#..#..#
+#..#..#
+#@....#
+#######`,
+   `
+###############
+######.########
+#...#...#...#.#
+#.#.#.#.#5#.#.#
+#.#.#.#.#.#.#4#
+#.#.#.#.#.#.#.#
+#@#...#..6#...#
+########^###.##
+###############`,
+   `
+#########
+#.......#
+#.#.#.#.#
+#.#.#.#.#
+#^#1#2#@#
+#########`,
+   `
+#########
+#@.1#..^#
+#...#...#
+#..2....#
+#########`,
+   `
+######
+###^##
+###3##
+###.##
+#1.@2#
+###.##
+###.##
+######`,
    `
 #########
 #@..#4.^#
@@ -363,42 +451,41 @@
  const wincon = function() {
    getPosition()
    if (overlap(player, exit) == true) {
-     if (levelNumber !=3){
-     window.removeEventListener("keydown", keys)
-     let text = document.createElement("p")
-     text.textContent = "HOT SUPER"
-     text.setAttribute("class", "win")
-     let winmsg = document.body.querySelector('#winmsg')
-     winmsg.appendChild(text)
-     let button = document.createElement("button")
-     button.textContent = "Next Level"
-     button.setAttribute("class", "next")
-     winmsg.appendChild(button)
-     let nlbutton = winmsg.querySelector('button')
-     nlbutton.addEventListener("click", levelnext)
+     if (levelNumber != 10) {
+       window.removeEventListener("keydown", keys)
+       let text = document.createElement("p")
+       text.textContent = "HOT SUPER"
+       text.setAttribute("class", "win")
+       let winmsg = document.body.querySelector('#winmsg')
+       winmsg.appendChild(text)
+       let button = document.createElement("button")
+       button.textContent = "Next Level"
+       button.setAttribute("class", "next")
+       winmsg.appendChild(button)
+       let nlbutton = winmsg.querySelector('button')
+       nlbutton.addEventListener("click", levelnext)
 
-     function levelnext() {
-       levelNumber = levelNumber + 1
-       scale = scalelist[levelNumber];
-       resetPositions()
-       load()
-       clearElement(winmsg)
-       window.addEventListener("keydown", keys)
+       function levelnext() {
+         levelNumber = levelNumber + 1
+         resetPositions()
+         load()
+         clearElement(winmsg)
+         window.addEventListener("keydown", keys)
+       }
+     } else {
+       window.removeEventListener("keydown", keys)
+       let el = document.querySelector("div")
+       clearElement(el)
+       let text = document.createElement("p")
+       text.textContent = "Congradulations you won"
+       text.setAttribute("class", "win")
+       let winmsg = document.body.querySelector('#winmsg')
+       winmsg.appendChild(text)
+       let under = document.createElement("p")
+       under.textContent = "took you long enough"
+       under.setAttribute("class", "win")
+       winmsg.appendChild(under)
      }
-   }else {
-      window.removeEventListener("keydown", keys)
-      let el = document.querySelector("div")
-      clearElement(el)
-      let text = document.createElement("p")
-      text.textContent = "Congradulations you won"
-      text.setAttribute("class", "win")
-      let winmsg = document.body.querySelector('#winmsg')
-      winmsg.appendChild(text)
-      let under = document.createElement("p")
-      under.textContent = "took you long enough"
-      under.setAttribute("class", "win")
-      winmsg.appendChild(under)
-   }
    }
  }
  const death = function() {
@@ -431,6 +518,14 @@
    display.syncState(State.start(simpleLevel));
  }
  window.addEventListener("keydown", keys)
+
+ function debugLoad(x) {
+
+   levelNumber = x;
+   load();
+   getPosition();
+
+ }
 
  function keys() {
    if (event.key == "s") {
