@@ -483,9 +483,23 @@
        under.textContent = "took you long enough"
        under.setAttribute("class", "win")
        winmsg.appendChild(under)
+
+       let button = document.createElement("button")
+       button.textContent = "Back to the begining"
+       button.setAttribute("class", "next")
+       winmsg.appendChild(button)
+       let nlbutton = winmsg.querySelector('button')
+       nlbutton.addEventListener("click", begining)
+       function begining() {
+         levelNumber = 0
+         clearElement(winmsg)
+         window.addEventListener("keydown",keys)
+         resetPositions()
+         load()
      }
    }
  }
+}
  const death = function() {
    getPosition()
    if (overlapMulitple(player, enemy1) == true ||
