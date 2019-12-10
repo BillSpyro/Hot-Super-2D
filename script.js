@@ -1,12 +1,10 @@
- let oldTestLevel = [
-   ,
-`
+ let oldTestLevel = [`
 #########
 #@..#1.^#
 #.......#
 #...#..2#
 #########`,
-`
+   `
 #########
 #@.1#..^#
 #.......#
@@ -112,9 +110,8 @@
 #@..#4.^#
 #.......#
 #...#..5#
-#########`
-,
-`
+#########`,
+   `
 #########
 #@..#1.^#
 #.......#
@@ -124,8 +121,7 @@
 #.......#
 #...#..4#
 #####.###
-....###..
-  `
+#########`
  ];
  let levelNumber = 0
  var Level = class Level {
@@ -381,7 +377,7 @@
      this.dom.remove();
    }
  }
- let scalelist = [70,100,100,100,100]
+ let scalelist = [70, 100, 100, 100, 100]
  let scale = scalelist[levelNumber];
 
  function drawGrid(level) {
@@ -453,7 +449,7 @@
  const wincon = function() {
    getPosition()
    if (overlap(player, exit) == true) {
-     if (levelNumber != 13) {
+     if (levelNumber != testLevel.length - 1) {
        window.removeEventListener("keydown", keys)
        let text = document.createElement("p")
        text.textContent = "HOT SUPER"
