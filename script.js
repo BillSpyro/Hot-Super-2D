@@ -1,15 +1,4 @@
- let oldTestLevel = [`
-#########
-#@..#1.^#
-#.......#
-#...#..2#
-#########
-#c..#3..#
-#.......#
-#...#..4#
-#####.###
-....###..
-   `
+ let oldTestLevel = [
    ,
 `
 #########
@@ -124,6 +113,19 @@
 #.......#
 #...#..5#
 #########`
+,
+`
+#########
+#@..#1.^#
+#.......#
+#...#..2#
+#########
+#c..#3..#
+#.......#
+#...#..4#
+#####.###
+....###..
+  `
  ];
  let levelNumber = 0
  var Level = class Level {
@@ -451,7 +453,7 @@
  const wincon = function() {
    getPosition()
    if (overlap(player, exit) == true) {
-     if (levelNumber != 10) {
+     if (levelNumber != 13) {
        window.removeEventListener("keydown", keys)
        let text = document.createElement("p")
        text.textContent = "HOT SUPER"
@@ -495,13 +497,7 @@
      overlapMulitple(player, enemy3) == true ||
      overlapMulitple(player, oppositeEnemy1) == true ||
      overlapMulitple(player, oppositeEnemy2) == true ||
-     overlapMulitple(player, oppositeEnemy3) == true ||
-     overlapMulitple(clone, enemy1) == true ||
-       overlapMulitple(clone, enemy2) == true ||
-       overlapMulitple(clone, enemy3) == true ||
-       overlapMulitple(clone, oppositeEnemy1) == true ||
-       overlapMulitple(clone, oppositeEnemy2) == true ||
-       overlapMulitple(clone, oppositeEnemy3) == true) {
+     overlapMulitple(player, oppositeEnemy3) == true) {
      window.removeEventListener("keydown", keys)
      let text = document.createElement("p")
      text.textContent = "SQUISH"
@@ -509,7 +505,22 @@
      let winmsg = document.body.querySelector('#winmsg')
      winmsg.appendChild(text)
    }
+   if (clone != null){
+   if (overlapMulitple(clone, enemy1) == true ||
+     overlapMulitple(clone, enemy2) == true ||
+     overlapMulitple(clone, enemy3) == true ||
+     overlapMulitple(clone, oppositeEnemy1) == true ||
+     overlapMulitple(clone, oppositeEnemy2) == true ||
+     overlapMulitple(clone, oppositeEnemy3) == true){
+       window.removeEventListener("keydown", keys)
+       let text = document.createElement("p")
+       text.textContent = "SQUISH"
+       text.setAttribute("class", "looser")
+       let winmsg = document.body.querySelector('#winmsg')
+       winmsg.appendChild(text)
+     }
  }
+}
  const load = function() {
    let el = document.querySelector("div")
    clearElement(el)
