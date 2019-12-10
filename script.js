@@ -262,8 +262,8 @@
      this.dom.remove();
    }
  }
-
- const scale = 100;
+ let scalelist = [100,100,100,100,100]
+ let scale = scalelist[levelNumber];
 
  function drawGrid(level) {
    return elt("table", {
@@ -350,6 +350,7 @@
 
      function levelnext() {
        levelNumber = levelNumber + 1
+       scale = scalelist[levelNumber];
        resetPositions()
        load()
        clearElement(winmsg)
