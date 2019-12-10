@@ -10,10 +10,12 @@
 
 .enemy1 {
   background: red;
+  border-radius: 100%
 }
 
 .enemy2 {
-  background: pink;
+  background: red;
+  border-radius: 100%
 }
 
 .enemy3 {
@@ -23,14 +25,17 @@
 
 .oppositeEnemy1 {
   background: purple;
+  border-radius: 100%
 }
 
 .oppositeEnemy2 {
   background: purple;
+  border-radius: 100%
 }
 
 .oppositeEnemy3 {
   background: purple;
+  border-radius: 100%
 }
 
 .wall {
@@ -47,9 +52,12 @@
 
 .player {
   background: blue;
+  border-radius: 100%
 }
-.clone{
+
+.clone {
   background: blue;
+  border-radius: 100%
 }
 
 .lost .player {
@@ -69,5 +77,5 @@
   font-size: 100px;
   padding: 0;
   margin: 0;
-  border : thin;
+  border: thin;
 }
