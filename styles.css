@@ -48,6 +48,9 @@
 .player {
   background: blue;
 }
+.clone{
+  background: blue;
+}
 
 .lost .player {
   background: rgb(160, 64, 64);

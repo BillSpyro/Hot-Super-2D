@@ -1,10 +1,24 @@
- let testLevel = [`
+ let testLevel = [
+`
+#########
+#@..#1.^#
+#.......#
+#...#..2#
+#########
+#c..#3..#
+#.......#
+#...#..4#
+#####.###
+....###..
+   `
+   ,
+`
 #########
 #@..#1.^#
 #.......#
 #...#..2#
 #########`,
-   `
+`
 #########
 #@.1#..^#
 #.......#
@@ -88,7 +102,21 @@
  }
 
  Player.prototype.size = new Vec(1, 1);
+ var Clone = class Clone {
+   constructor(pos) {
+     this.pos = pos;
+   }
 
+   get type() {
+     return "clone";
+   }
+
+   static create(pos) {
+     return new Clone(pos.plus(new Vec(playerx, playery)),
+       new Vec(0, 0));
+   }
+ }
+ Clone.prototype.size = new Vec(1, 1);
  var Enemy1 = class Enemy1 {
    constructor(pos) {
      this.pos = pos;
@@ -235,7 +263,8 @@
    "5": OppositeEnemy2,
    "6": OppositeEnemy3,
    "@": Player,
-   "^": Exit
+   "^": Exit,
+   "c": Clone
  };
 
  function elt(name, attrs, ...children) {
@@ -262,7 +291,7 @@
      this.dom.remove();
    }
  }
- let scalelist = [100,100,100,100,100]
+ let scalelist = [70,100,100,100,100]
  let scale = scalelist[levelNumber];
 
  function drawGrid(level) {
@@ -379,7 +408,13 @@
      overlapMulitple(player, enemy3) == true ||
      overlapMulitple(player, oppositeEnemy1) == true ||
      overlapMulitple(player, oppositeEnemy2) == true ||
-     overlapMulitple(player, oppositeEnemy3) == true) {
+     overlapMulitple(player, oppositeEnemy3) == true ||
+     overlapMulitple(clone, enemy1) == true ||
+       overlapMulitple(clone, enemy2) == true ||
+       overlapMulitple(clone, enemy3) == true ||
+       overlapMulitple(clone, oppositeEnemy1) == true ||
+       overlapMulitple(clone, oppositeEnemy2) == true ||
+       overlapMulitple(clone, oppositeEnemy3) == true) {
      window.removeEventListener("keydown", keys)
      let text = document.createElement("p")
      text.textContent = "SQUISH"
@@ -689,6 +724,7 @@
    oppositeEnemy3 = document.body.querySelectorAll(".oppositeEnemy3");
    wall = document.body.querySelectorAll(".wall");
    exit = document.body.querySelector(".exit");
+   clone = document.body.querySelector(".clone");
  }
 
  function overlapMulitple(actor1, actor2) {
