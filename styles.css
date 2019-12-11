@@ -14,6 +14,15 @@ body {
   border-radius: 25%
 }
 
+.Stats {
+
+display: flex;
+width: 20%;
+justify-content: space-around;
+background-color: LightGrey;
+
+}
+
 #winmsg {
 
 display: flex;

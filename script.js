@@ -412,7 +412,7 @@
 
  class DOMDisplay {
    constructor(parent, level) {
-     this.dom = elt("div", {
+     this.dom = elt("div.Game", {
        class: "game"
      }, drawGrid(level));
      this.actorLayer = null;
@@ -423,22 +423,7 @@
      this.dom.remove();
    }
  }
- let namearray = ['wasd to move you daft blue ball'
-,'They move when you do','The Hall'
-,'Oh Your Aproching Me'
-,'You are Surrounded From this side'
-,'What If There Was Another One'
-,'The Notapenis'
-,'Pitman'
-,'Let Them DIE'
-,'Amazeing'
-,'Im Coming For You ...Eventualy'
-,'Comb'
-,'GG EZ'
-,'Crossroads'
-,'Mirror'
-,'I Think Im a Clone Now'
-,'you is the winner']
+ let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Aproching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventualy', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think Im a Clone Now', 'you is the winner']
  let scalelist = [70, 100, 100, 100, 100]
  let scale = scalelist[levelNumber];
 
@@ -457,8 +442,8 @@
  }
 
  function drawActors(actors) {
-   return elt("div", {}, ...actors.map(actor => {
-     let rect = elt("div", {
+   return elt("div.Game", {}, ...actors.map(actor => {
+     let rect = elt("div.Game", {
        class: `actor ${actor.type}`
      });
      rect.style.width = `${actor.size.x * scale}px`;
@@ -506,6 +491,7 @@
  let souls = 0;
 
  let moves = 0;
+ let totalMoves = 0;
 
  const clearElement = (element) => {
    while (element.firstChild) {
@@ -539,7 +525,7 @@
        }
      } else {
        window.removeEventListener("keydown", keys)
-       let el = document.querySelector("div")
+       let el = document.querySelector("div.Game")
        clearElement(el)
        let text = document.createElement("p")
        text.textContent = "Congradulations you won"
@@ -557,8 +543,10 @@
        let nlbutton = winmsg.querySelector('button')
        nlbutton.addEventListener("click", begining)
        let top = document.querySelector("#levelName")
-       top.textContent = "You donated " + souls + " souls"
+       top.textContent = "You donated " + souls + " souls and you moved " + totalMoves + " times"
+
        function begining() {
+         totalMoves = 0;
          souls = 0;
          levelNumber = 0
          clearElement(winmsg)
@@ -578,7 +566,6 @@
      overlapMulitple(player, oppositeEnemy2) == true ||
      overlapMulitple(player, oppositeEnemy3) == true ||
      overlapMulitple(player, pit) == true) {
-     souls = souls + 1;
      moves = 0;
      window.removeEventListener("keydown", keys)
      let text = document.createElement("p")
@@ -635,12 +622,20 @@
    }
  }
  const load = function() {
-   let el = document.querySelector("div")
+   let stats = document.querySelector("div.Stats")
+   clearElement(stats)
+   let movesText = document.createElement("p")
+   movesText.textContent = "Moves " + moves;
+   let soulsText = document.createElement("p")
+   soulsText.textContent = "Souls donated " + souls;
+   stats.appendChild(movesText)
+   stats.appendChild(soulsText)
+   let el = document.querySelector("div.Game")
    clearElement(el)
    let top = document.querySelector("#levelName")
    top.textContent = namearray[levelNumber]
    let simpleLevel = new Level(testLevel[levelNumber]);
-   let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+   let display = new DOMDisplay(document.body.querySelector("div.Game"), simpleLevel);
    display.syncState(State.start(simpleLevel));
  }
  window.addEventListener("keydown", keys)
@@ -648,6 +643,7 @@
  function debugLoad(x) {
 
    levelNumber = x;
+   resetPositions();
    load();
    getPosition();
 
@@ -656,6 +652,7 @@
  function keys() {
    if (event.key == "s") {
      moves = moves + 1;
+     totalMoves = totalMoves + 1;
      playery = playery + 1
      en1y = en1y + 1
      en2y = en2y + 1
@@ -712,6 +709,7 @@
    }
    if (event.key == "w") {
      moves = moves + 1;
+     totalMoves = totalMoves + 1;
      playery = playery - 1
      en1y = en1y - 1
      en2y = en2y - 1
@@ -768,6 +766,7 @@
    }
    if (event.key == "a") {
      moves = moves + 1;
+     totalMoves = totalMoves + 1;
      playerx = playerx - 1
      en1x = en1x - 1
      en2x = en2x - 1
@@ -824,6 +823,7 @@
    }
    if (event.key == "d") {
      moves = moves + 1;
+     totalMoves = totalMoves + 1;
      playerx = playerx + 1
      en1x = en1x + 1
      en2x = en2x + 1
@@ -998,16 +998,17 @@
 
    }
  }
-load()
+ load()
  let resetb = document.body.querySelector("button")
  getPosition();
  resetb.addEventListener("click", event => {
    moves = 0;
+   souls = souls + 1;
    resetPositions();
-   let el = document.querySelector("div")
+   let el = document.querySelector("div.Game")
    clearElement(el)
    let simpleLevel = new Level(testLevel[levelNumber]);
-   let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
+   let display = new DOMDisplay(document.body.querySelector("div.Game"), simpleLevel);
    display.syncState(State.start(simpleLevel));
    window.addEventListener("keydown", keys)
    let winmsg = document.body.querySelector('#winmsg')
