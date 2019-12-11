@@ -1,3 +1,27 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #73d8d3;
+}
+
+.Message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: red;
+  padding: 10px;
+  border-radius: 25%
+}
+
+#winmsg {
+
+display: flex;
+flex-direction: column;
+align-items: center;
+
+}
+
 .background {
   background: grey;
   table-layout: fixed;
@@ -62,14 +86,6 @@
 .clone {
   background: blue;
   border-radius: 100%
-}
-
-.lost .player {
-  background: rgb(160, 64, 64);
-}
-
-.won .player {
-  box-shadow: -4px -7px 8px white, 4px -7px 8px white;
 }
 
 .game {
