@@ -486,6 +486,10 @@
 
  resetPositions();
 
+ let souls = 0;
+
+ let moves = 0;
+
  const clearElement = (element) => {
    while (element.firstChild) {
      element.removeChild(element.firstChild);
@@ -509,6 +513,7 @@
        nlbutton.addEventListener("click", levelnext)
 
        function levelnext() {
+         moves = 0;
          levelNumber = levelNumber + 1
          resetPositions()
          load()
@@ -535,16 +540,18 @@
        winmsg.appendChild(button)
        let nlbutton = winmsg.querySelector('button')
        nlbutton.addEventListener("click", begining)
+
        function begining() {
+         souls = 0;
          levelNumber = 0
          clearElement(winmsg)
-         window.addEventListener("keydown",keys)
+         window.addEventListener("keydown", keys)
          resetPositions()
          load()
+       }
      }
    }
  }
-}
  const death = function() {
    getPosition()
    if (overlapMulitple(player, enemy1) == true ||
@@ -554,6 +561,8 @@
      overlapMulitple(player, oppositeEnemy2) == true ||
      overlapMulitple(player, oppositeEnemy3) == true ||
      overlapMulitple(player, pit) == true) {
+     souls = souls + 1;
+     moves = 0;
      window.removeEventListener("keydown", keys)
      let text = document.createElement("p")
      text.textContent = "SQUISH"
@@ -627,6 +636,7 @@
 
  function keys() {
    if (event.key == "s") {
+     moves = moves + 1;
      playery = playery + 1
      en1y = en1y + 1
      en2y = en2y + 1
@@ -682,6 +692,7 @@
      death()
    }
    if (event.key == "w") {
+     moves = moves + 1;
      playery = playery - 1
      en1y = en1y - 1
      en2y = en2y - 1
@@ -737,6 +748,7 @@
      death()
    }
    if (event.key == "a") {
+     moves = moves + 1;
      playerx = playerx - 1
      en1x = en1x - 1
      en2x = en2x - 1
@@ -792,6 +804,7 @@
      death()
    }
    if (event.key == "d") {
+     moves = moves + 1;
      playerx = playerx + 1
      en1x = en1x + 1
      en2x = en2x + 1
@@ -972,6 +985,7 @@
  let resetb = document.body.querySelector("button")
  getPosition();
  resetb.addEventListener("click", event => {
+   moves = 0;
    resetPositions();
    let el = document.querySelector("div")
    clearElement(el)
