@@ -546,6 +546,7 @@
        top.textContent = "You donated " + souls + " souls and you moved " + totalMoves + " times"
 
        function begining() {
+         moves = 0;
          totalMoves = 0;
          souls = 0;
          levelNumber = 0
