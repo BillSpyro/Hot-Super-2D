@@ -424,8 +424,8 @@
    }
  }
  let namearray = ['wasd to move you daft blue ball'
- ,'They move when you do','The Hall'
- ,'Oh Your Aproching Me'
+,'They move when you do','The Hall'
+,'Oh Your Aproching Me'
 ,'You are Surrounded From this side'
 ,'What If There Was Another One'
 ,'The Notapenis'
@@ -550,14 +550,14 @@
        under.textContent = "took you long enough"
        under.setAttribute("class", "win")
        winmsg.appendChild(under)
-
        let button = document.createElement("button")
        button.textContent = "Back to the begining"
        button.setAttribute("class", "next")
        winmsg.appendChild(button)
        let nlbutton = winmsg.querySelector('button')
        nlbutton.addEventListener("click", begining)
-
+       let top = document.querySelector("#levelName")
+       top.textContent = "You donated " + souls + " souls"
        function begining() {
          souls = 0;
          levelNumber = 0
