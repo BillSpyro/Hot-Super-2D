@@ -146,8 +146,21 @@
 #...#..4#
 #####.###
 #########`
+,`
+###################
+#..............55.#
+#@.............44^#
+#..............66.#
+###################
+`
  ];
+ let souls = 0;
+ let moves = 0;
+ let totalMoves = 0;
  let levelNumber = 0
+ let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Aproching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventualy', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think Im a Clone Now',"You donated " + souls + " souls you little shit so you get to burn in hell"]
+ let scalelist = [70, 100, 100, 100, 100]
+ let scale = scalelist[levelNumber];
  var Level = class Level {
    constructor(plan) {
      let rows = plan.trim().split("\n").map(l => [...l]);
@@ -423,9 +436,7 @@
      this.dom.remove();
    }
  }
- let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Aproching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventualy', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think Im a Clone Now', 'you is the winner']
- let scalelist = [70, 100, 100, 100, 100]
- let scale = scalelist[levelNumber];
+
 
  function drawGrid(level) {
    return elt("table", {
@@ -487,12 +498,6 @@
  }
 
  resetPositions();
-
- let souls = 0;
-
- let moves = 0;
- let totalMoves = 0;
-
  const clearElement = (element) => {
    while (element.firstChild) {
      element.removeChild(element.firstChild);
@@ -501,7 +506,7 @@
  const wincon = function() {
    getPosition()
    if (overlap(player, exit) == true) {
-     if (levelNumber != testLevel.length - 1) {
+     if (levelNumber < testLevel.length - 2 ) {
        window.removeEventListener("keydown", keys)
        let winmsg = document.body.querySelector('#winmsg')
        let button = document.createElement("button")
@@ -524,6 +529,7 @@
          window.addEventListener("keydown", keys)
        }
      } else {
+       if (souls != 0 && levelNumber == testLevel.length - 2){
        window.removeEventListener("keydown", keys)
        let el = document.querySelector("div.Game")
        clearElement(el)
@@ -543,8 +549,6 @@
        let nlbutton = winmsg.querySelector('button')
        nlbutton.addEventListener("click", begining)
        let top = document.querySelector("#levelName")
-       top.textContent = "You donated " + souls + " souls and you moved " + totalMoves + " times"
-
        function begining() {
          moves = 0;
          totalMoves = 0;
@@ -555,6 +559,16 @@
          resetPositions()
          load()
        }
+     } else{
+       if (levelNumber=15){
+       levelNumber=levelNumber+1
+     }
+       resetPositions()
+       let top = document.querySelector("#levelName")
+       top.textContent = "You donated " + souls + " souls you little shit so you get to burn in hell"
+       let el = document.querySelector("div")
+       load()
+     }
      }
    }
  }
