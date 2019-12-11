@@ -496,15 +496,15 @@
    if (overlap(player, exit) == true) {
      if (levelNumber != testLevel.length - 1) {
        window.removeEventListener("keydown", keys)
-       let text = document.createElement("p")
-       text.textContent = "HOT SUPER"
-       text.setAttribute("class", "win")
        let winmsg = document.body.querySelector('#winmsg')
-       winmsg.appendChild(text)
        let button = document.createElement("button")
        button.textContent = "Next Level"
        button.setAttribute("class", "next")
        winmsg.appendChild(button)
+       let text = document.createElement("p")
+       text.textContent = "HOT SUPER"
+       text.setAttribute("class", "win")
+       winmsg.appendChild(text)
        let nlbutton = winmsg.querySelector('button')
        nlbutton.addEventListener("click", levelnext)
 
