@@ -383,6 +383,7 @@
 
  Wall.prototype.size = new Vec(1, 1);
 
+
  var entities = {
    ".": "empty",
    "#": Wall,
@@ -422,6 +423,22 @@
      this.dom.remove();
    }
  }
+ let namearray = ['wasd to move you daft blue ball'
+ ,'They move when you do','The Hall'
+ ,'Oh Your Aproching Me'
+,'You are Surrounded From this side'
+,'What If There Was Another One'
+,'The Notapenis'
+,'Pitman'
+,'Let Them DIE'
+,'Amazeing'
+,'Im Coming For You ...Eventualy'
+,'Comb'
+,'GG EZ'
+,'Crossroads'
+,'Mirror'
+,'I Think Im a Clone Now'
+,'you is the winner']
  let scalelist = [70, 100, 100, 100, 100]
  let scale = scalelist[levelNumber];
 
@@ -620,6 +637,8 @@
  const load = function() {
    let el = document.querySelector("div")
    clearElement(el)
+   let top = document.querySelector("#levelName")
+   top.textContent = namearray[levelNumber]
    let simpleLevel = new Level(testLevel[levelNumber]);
    let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
    display.syncState(State.start(simpleLevel));
@@ -979,9 +998,7 @@
 
    }
  }
- let simpleLevel = new Level(testLevel[levelNumber]);
- let display = new DOMDisplay(document.body.querySelector("div"), simpleLevel);
- display.syncState(State.start(simpleLevel));
+load()
  let resetb = document.body.querySelector("button")
  getPosition();
  resetb.addEventListener("click", event => {
