@@ -149,7 +149,11 @@
 ,
 `
 ##################
+#123............!#
+##################
 #@..............^#
+##################
+#!............456#
 ##################
 `
 ,
@@ -510,11 +514,13 @@
      element.removeChild(element.firstChild);
    }
  };
+
  const wincon = function() {
    getPosition()
    if (overlap(player, exit) == true) {
      if (levelNumber < testLevel.length - 2 ) {
        window.removeEventListener("keydown", keys)
+       window.addEventListener("keydown",nextLevel)
        let winmsg = document.body.querySelector('#winmsg')
        let button = document.createElement("button")
        button.textContent = "Next Level"
@@ -537,7 +543,7 @@
        }
      } else {
        if (souls != 0 && levelNumber == testLevel.length - 2){
-       document.querySelector('#levelName').textContent = "Thanks for playing"
+       document.querySelector('#levelName').textContent = "Thanks for dying"
        window.removeEventListener("keydown", keys)
        let el = document.querySelector("div.Game")
        clearElement(el)
@@ -579,6 +585,16 @@
      }
      }
    }
+ }
+ function nextLevel(){
+   if (event.key == " ")
+   moves = 0;
+   levelNumber = levelNumber + 1
+   resetPositions()
+   load()
+   clearElement(winmsg)
+   window.addEventListener("keydown", keys)
+   window.removeEventListener('keydown',nextLevel)
  }
  const death = function() {
    getPosition()
@@ -661,10 +677,26 @@
    let display = new DOMDisplay(document.body.querySelector("div.Game"), simpleLevel);
    display.syncState(State.start(simpleLevel));
  }
+ window.addEventListener("keydown", reee)
+ function reee(){
+   if (event.key =='r'){
+   moves = 0;
+   souls = souls + 1;
+   resetPositions();
+   let el = document.querySelector("div.Game")
+   clearElement(el)
+   let simpleLevel = new Level(testLevel[levelNumber]);
+   let display = new DOMDisplay(document.body.querySelector("div.Game"), simpleLevel);
+   display.syncState(State.start(simpleLevel));
+   window.addEventListener("keydown", keys)
+   let winmsg = document.body.querySelector('#winmsg')
+   clearElement(winmsg)
+ }
+
+ }
  window.addEventListener("keydown", keys)
 
  function debugLoad(x) {
-
    levelNumber = x;
    resetPositions();
    load();
