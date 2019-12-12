@@ -741,6 +741,8 @@
      document.querySelector('#levelName').textContent = "One more and you will be free"
    }
    if (levelNumber == testLevel.length-1 && souls >= 100){
+     namearray[0] = "Oh your back"
+     namearray[1] = "well go ahead nothing else changes"
      moves = 0;
      totalMoves = 0;
      souls = 0;
@@ -751,6 +753,7 @@
      window.addEventListener("keydown", keys)
      resetPositions()
      load()
+
    }
  }
  window.addEventListener("keydown", reee)
@@ -758,12 +761,10 @@
    if (event.key =='r'){
    moves = 0;
    souls = souls + 1;
+   let soulsText = document.createElement("p")
+   soulsText.textContent = "Souls donated " + souls;
    resetPositions();
-   let el = document.querySelector("div.Game")
-   clearElement(el)
-   let simpleLevel = new Level(testLevel[levelNumber]);
-   let display = new DOMDisplay(document.body.querySelector("div.Game"), simpleLevel);
-   display.syncState(State.start(simpleLevel));
+   load()
    window.addEventListener("keydown", keys)
    let winmsg = document.body.querySelector('#winmsg')
    clearElement(winmsg)
@@ -1234,11 +1235,7 @@
    moves = 0;
    souls = souls + 1;
    resetPositions();
-   let el = document.querySelector("div.Game")
-   clearElement(el)
-   let simpleLevel = new Level(testLevel[levelNumber]);
-   let display = new DOMDisplay(document.body.querySelector("div.Game"), simpleLevel);
-   display.syncState(State.start(simpleLevel));
+   load()
    window.addEventListener("keydown", keys)
    let winmsg = document.body.querySelector('#winmsg')
    clearElement(winmsg)
