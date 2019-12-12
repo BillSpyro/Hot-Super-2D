@@ -745,6 +745,8 @@
      totalMoves = 0;
      souls = 0;
      levelNumber = 0
+     let body = document.querySelector("body");
+     body.style.backgroundColor = "yellow";
      clearElement(winmsg)
      window.addEventListener("keydown", keys)
      resetPositions()
