@@ -152,11 +152,11 @@
 ..#.........#..
 .#...........#.
 .#...........#.
-#....11111....#
-#....1...1....#
-#....1.@.1....#
-#....1...1....#
-#....11.11....#
+#....22222....#
+#....2...2....#
+#....2.@.2....#
+#....2...2....#
+#....22122....#
 .#...........#.
 .#...........#.
 ..#.........#..
@@ -549,6 +549,7 @@
  const wincon = function() {
    getPosition()
    if (overlap(player, exit) == true) {
+     moves = 0;
      if (levelNumber < testLevel.length - 2 ) {
        window.removeEventListener("keydown", keys)
        window.addEventListener("keydown",nextLevel)
