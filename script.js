@@ -580,7 +580,7 @@
          let el = document.querySelector("div.Game")
          clearElement(el)
          let text = document.createElement("p")
-         text.textContent = "Congradulations you won"
+         text.textContent = "Congratulations you won"
          text.setAttribute("class", "win")
          let winmsg = document.body.querySelector('#winmsg')
          winmsg.appendChild(text)
