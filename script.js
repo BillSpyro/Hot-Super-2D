@@ -720,13 +720,13 @@
      document.querySelector('#levelName').textContent = "YES DIE FOR US"
    }
    if (levelNumber == testLevel.length - 1 && souls >= 20) {
-     document.querySelector('#levelName').textContent = "Your souls will fue; us"
+     document.querySelector('#levelName').textContent = "Your souls will fuel us"
    }
    if (levelNumber == testLevel.length - 1 && souls >= 30) {
      document.querySelector('#levelName').textContent = "Oh um thank you, you can just refresh now"
    }
    if (levelNumber == testLevel.length - 1 && souls >= 40) {
-     document.querySelector('#levelName').textContent = "You are very determined arnt you"
+     document.querySelector('#levelName').textContent = "You are very determined aren't you"
    }
    if (levelNumber == testLevel.length - 1 && souls >= 50) {
      document.querySelector('#levelName').textContent = "There is nothing left, no point in going on"
@@ -748,7 +748,7 @@
    }
    if (levelNumber == testLevel.length - 1 && souls >= 100) {
      namearray[0] = "Oh your back"
-     namearray[1] = "Well go ahead nothing else changes, their truely is no escape"
+     namearray[1] = "Well go ahead nothing else changes, there truely is no escape"
      moves = 0;
      totalMoves = 0;
      souls = 0;
