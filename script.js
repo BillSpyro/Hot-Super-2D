@@ -146,7 +146,14 @@
 #...#..4#
 #####.###
 #########`
-,`
+,
+`
+##################
+#@..............^#
+##################
+`
+,
+`
 ###################
 #..............55.#
 #@.............44^#
@@ -158,7 +165,7 @@
  let moves = 0;
  let totalMoves = 0;
  let levelNumber = 0
- let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Aproching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventualy', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think Im a Clone Now',"You donated " + souls + " souls you little shit so you get to burn in hell"]
+ let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Aproching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventualy', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think Im a Clone Now','16',"You donated " + souls + " souls you little shit so you get to burn in hell"]
  let scalelist = [70, 100, 100, 100, 100]
  let scale = scalelist[levelNumber];
  var Level = class Level {
@@ -530,6 +537,7 @@
        }
      } else {
        if (souls != 0 && levelNumber == testLevel.length - 2){
+       document.querySelector('#levelName').textContent = "Thanks for playing"
        window.removeEventListener("keydown", keys)
        let el = document.querySelector("div.Game")
        clearElement(el)
@@ -539,7 +547,7 @@
        let winmsg = document.body.querySelector('#winmsg')
        winmsg.appendChild(text)
        let under = document.createElement("p")
-       under.textContent = "took you long enough"
+       under.textContent = "try dont die and go to heck"
        under.setAttribute("class", "win")
        winmsg.appendChild(under)
        let button = document.createElement("button")
@@ -560,7 +568,7 @@
          load()
        }
      } else{
-       if (levelNumber=15){
+       if (levelNumber=testLevel.length-2){
        levelNumber=levelNumber+1
      }
        resetPositions()
