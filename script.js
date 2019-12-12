@@ -146,7 +146,7 @@
 #...#..4#
 #####.###
 #########`,
-`
+   `
 .....#####.....
 ...##..^..##...
 ..#.........#..
@@ -162,7 +162,7 @@
 ..#.........#..
 ...##.....##...
 .....#####.....`,
-`
+   `
 ...#####.........#####...
 .##.....##.....##.....##.
 #...6@....#####...1c....#
@@ -170,12 +170,11 @@
 .##....^##.....##.....##.
 ...#####.........#####...
 
-`
-,
-`
-########################
-####!.............1#####
-########################
+`,
+   `
+#######################
+####!.............1####
+#######################
 ##!#.............@#^#!#
 ##.#.##############.#.#
 ##.#.#!!!!!!!!!!!!#.#.#
@@ -186,9 +185,8 @@
 #######################
 ####!..............6###
 #######################
-`
-,
-`
+`,
+   `
 ###################
 #..............55.#
 #@.............44^#
@@ -200,8 +198,8 @@
  let moves = 0;
  let totalMoves = 0;
  let levelNumber = 0
- let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Aproching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventualy', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think Im a Clone Now',"There is no escape B", "I see you is where you are going gotem ", "Victory loop","You donated " + souls + " souls you little shit so you get to burn in hell"]
- let scalelist = [70, 70,70,70,70,70,70,70,70,70,70,70,70,70,70,50,50,50,50,50,50]
+ let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Approaching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventually', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think I have a Clone Now', "There is no escape", "I see you is where you are going gotem", "Victory loop", "You donated " + souls + " souls you little shit so you get to burn in hell"]
+ let scalelist = [70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 50, 50, 50, 50, 50, 50]
  let scale = scalelist[levelNumber];
  var Level = class Level {
    constructor(plan) {
@@ -550,9 +548,9 @@
    getPosition()
    if (overlap(player, exit) == true) {
      moves = 0;
-     if (levelNumber < testLevel.length - 2 ) {
+     if (levelNumber < testLevel.length - 2) {
        window.removeEventListener("keydown", keys)
-       window.addEventListener("keydown",nextLevel)
+       window.addEventListener("keydown", nextLevel)
        let winmsg = document.body.querySelector('#winmsg')
        let button = document.createElement("button")
        button.textContent = "Next Level"
@@ -566,7 +564,7 @@
        nlbutton.addEventListener("click", levelnext)
 
        function levelnext() {
-         window.removeEventListener('keydown',nextLevel)
+         window.removeEventListener('keydown', nextLevel)
          moves = 0;
          levelNumber = levelNumber + 1
          resetPositions()
@@ -575,62 +573,64 @@
          window.addEventListener("keydown", keys)
        }
      } else {
-       if (souls != 0 && levelNumber == testLevel.length - 2){
-       document.querySelector('#levelName').textContent = "You've moved " + totalMoves + " times and donated " + souls + " souls."
-       window.removeEventListener("keydown", keys)
-       let el = document.querySelector("div.Game")
-       clearElement(el)
-       let text = document.createElement("p")
-       text.textContent = "Congradulations you won"
-       text.setAttribute("class", "win")
-       let winmsg = document.body.querySelector('#winmsg')
-       winmsg.appendChild(text)
-       let under = document.createElement("p")
-       under.textContent = "try dont die and go to heck"
-       under.setAttribute("class", "win")
-       winmsg.appendChild(under)
-       let button = document.createElement("button")
-       button.textContent = "Back to the begining"
-       button.setAttribute("class", "next")
-       winmsg.appendChild(button)
-       let nlbutton = winmsg.querySelector('button')
-       nlbutton.addEventListener("click", begining)
-       let top = document.querySelector("#levelName")
-       function begining() {
-         moves = 0;
-         totalMoves = 0;
-         souls = 0;
-         levelNumber = 0
-         clearElement(winmsg)
-         window.addEventListener("keydown", keys)
+       if (souls != 0 && levelNumber == testLevel.length - 2) {
+         document.querySelector('#levelName').textContent = "You've moved " + totalMoves + " times and donated " + souls + " souls."
+         window.removeEventListener("keydown", keys)
+         let el = document.querySelector("div.Game")
+         clearElement(el)
+         let text = document.createElement("p")
+         text.textContent = "Congradulations you won"
+         text.setAttribute("class", "win")
+         let winmsg = document.body.querySelector('#winmsg')
+         winmsg.appendChild(text)
+         let under = document.createElement("p")
+         under.textContent = "try dont die and go to heck"
+         under.setAttribute("class", "win")
+         winmsg.appendChild(under)
+         let button = document.createElement("button")
+         button.textContent = "Back to the begining"
+         button.setAttribute("class", "next")
+         winmsg.appendChild(button)
+         let nlbutton = winmsg.querySelector('button')
+         nlbutton.addEventListener("click", begining)
+         let top = document.querySelector("#levelName")
+
+         function begining() {
+           moves = 0;
+           totalMoves = 0;
+           souls = 0;
+           levelNumber = 0
+           clearElement(winmsg)
+           window.addEventListener("keydown", keys)
+           resetPositions()
+           load()
+         }
+       } else {
+         if (levelNumber = testLevel.length - 2) {
+           levelNumber = levelNumber + 1
+         }
          resetPositions()
+         let top = document.querySelector("#levelName")
+         top.textContent = "You donated " + souls + " souls you little shit so, you get to burn in hell"
+         let el = document.querySelector("div")
+         el.style.backgroundcolor
+         let body = document.querySelector("body");
+         body.style.backgroundColor = "darkRed";
          load()
        }
-     } else{
-       if (levelNumber=testLevel.length-2){
-       levelNumber=levelNumber+1
-     }
-       resetPositions()
-       let top = document.querySelector("#levelName")
-       top.textContent = "You donated " + souls + " souls you little shit so you get to burn in hell"
-       let el = document.querySelector("div")
-       el.style.backgroundcolor
-       let body = document.querySelector("body");
-       body.style.backgroundColor = "darkRed";
-       load()
-     }
      }
    }
  }
- function nextLevel(){
+
+ function nextLevel() {
    if (event.key == " ")
-   moves = 0;
+     moves = 0;
    levelNumber = levelNumber + 1
    resetPositions()
    load()
    clearElement(winmsg)
    window.addEventListener("keydown", keys)
-   window.removeEventListener('keydown',nextLevel)
+   window.removeEventListener('keydown', nextLevel)
  }
  const death = function() {
    getPosition()
@@ -713,36 +713,42 @@
    let simpleLevel = new Level(testLevel[levelNumber]);
    let display = new DOMDisplay(document.body.querySelector("div.Game"), simpleLevel);
    display.syncState(State.start(simpleLevel));
-   if (levelNumber == testLevel.length-1 && souls >= 5){
+   if (levelNumber == testLevel.length - 1 && souls >= 5) {
      document.querySelector('#levelName').textContent = "DIE DIE DIE"
    }
-   if (levelNumber == testLevel.length-1 && souls >= 10){
+   if (levelNumber == testLevel.length - 1 && souls >= 10) {
      document.querySelector('#levelName').textContent = "YES DIE FOR US"
-   }if (levelNumber == testLevel.length-1 && souls >= 20){
-     document.querySelector('#levelName').textContent = "Your souls will fule us"
-   }if (levelNumber == testLevel.length-1 && souls >= 30){
-     document.querySelector('#levelName').textContent = "oh um thank you you can just refresh now"
-   }if (levelNumber == testLevel.length-1 && souls >= 40){
-     document.querySelector('#levelName').textContent = "You are verry ditermend arnt you"
-   }if (levelNumber == testLevel.length-1 && souls >= 50){
-     document.querySelector('#levelName').textContent = "there is nothing left no point in going on"
-   }if (levelNumber == testLevel.length-1 && souls >= 60){
-     document.querySelector('#levelName').textContent = "STOP"
-   }if (levelNumber == testLevel.length-1 && souls >= 70){
-     document.querySelector('#levelName').textContent = "Well Okay ll just leave then"
    }
-   if (levelNumber == testLevel.length-1 && souls >= 80){
+   if (levelNumber == testLevel.length - 1 && souls >= 20) {
+     document.querySelector('#levelName').textContent = "Your souls will fue; us"
+   }
+   if (levelNumber == testLevel.length - 1 && souls >= 30) {
+     document.querySelector('#levelName').textContent = "Oh um thank you, you can just refresh now"
+   }
+   if (levelNumber == testLevel.length - 1 && souls >= 40) {
+     document.querySelector('#levelName').textContent = "You are very determined arnt you"
+   }
+   if (levelNumber == testLevel.length - 1 && souls >= 50) {
+     document.querySelector('#levelName').textContent = "There is nothing left, no point in going on"
+   }
+   if (levelNumber == testLevel.length - 1 && souls >= 60) {
+     document.querySelector('#levelName').textContent = "STOP"
+   }
+   if (levelNumber == testLevel.length - 1 && souls >= 70) {
+     document.querySelector('#levelName').textContent = "Well Okay I'll just leave then"
+   }
+   if (levelNumber == testLevel.length - 1 && souls >= 80) {
      document.querySelector('#levelName').textContent = "..."
    }
-   if (levelNumber == testLevel.length-1 && souls >= 90){
-     document.querySelector('#levelName').textContent = "Fine make it 100 and I shall reward you"
+   if (levelNumber == testLevel.length - 1 && souls >= 90) {
+     document.querySelector('#levelName').textContent = "Fine, make it 100 and I shall reward you"
    }
-   if (levelNumber == testLevel.length-1 && souls >= 99){
+   if (levelNumber == testLevel.length - 1 && souls >= 99) {
      document.querySelector('#levelName').textContent = "One more and you will be free"
    }
-   if (levelNumber == testLevel.length-1 && souls >= 100){
+   if (levelNumber == testLevel.length - 1 && souls >= 100) {
      namearray[0] = "Oh your back"
-     namearray[1] = "well go ahead nothing else changes"
+     namearray[1] = "Well go ahead nothing else changes, their truely is no escape"
      moves = 0;
      totalMoves = 0;
      souls = 0;
@@ -757,20 +763,21 @@
    }
  }
  window.addEventListener("keydown", reee)
- function reee(){
-   if (event.key =='r'){
-   moves = 0;
-   souls = souls + 1;
-   let soulsText = document.createElement("p")
-   soulsText.textContent = "Souls donated " + souls;
-   resetPositions();
-   load()
-   window.addEventListener("keydown", keys)
-   let winmsg = document.body.querySelector('#winmsg')
-   clearElement(winmsg)
+
+ function reee() {
+   if (event.key == 'r') {
+     moves = 0;
+     souls = souls + 1;
+     let soulsText = document.createElement("p")
+     soulsText.textContent = "Souls donated " + souls;
+     resetPositions();
+     load()
+     window.addEventListener("keydown", keys)
+     let winmsg = document.body.querySelector('#winmsg')
+     clearElement(winmsg)
 
 
- }
+   }
 
  }
  window.addEventListener("keydown", keys)
