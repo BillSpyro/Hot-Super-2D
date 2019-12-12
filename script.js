@@ -200,7 +200,7 @@
  let moves = 0;
  let totalMoves = 0;
  let levelNumber = 0
- let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Aproching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventualy', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think Im a Clone Now',"I see you is where you are going gotem ", "Victory loop","You donated " + souls + " souls you little shit so you get to burn in hell"]
+ let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Aproching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventualy', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think Im a Clone Now',"There is no escape B", "I see you is where you are going gotem ", "Victory loop","You donated " + souls + " souls you little shit so you get to burn in hell"]
  let scalelist = [70, 70,70,70,70,70,70,70,70,70,70,70,70,70,70,50,50,50,50,50,50]
  let scale = scalelist[levelNumber];
  var Level = class Level {
