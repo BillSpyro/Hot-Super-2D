@@ -714,28 +714,28 @@
    let display = new DOMDisplay(document.body.querySelector("div.Game"), simpleLevel);
    display.syncState(State.start(simpleLevel));
    if (levelNumber == testLevel.length-1 && souls >= 5){
-     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+     document.querySelector('#levelName').textContent = "DIE DIE DIE"
    }
    if (levelNumber == testLevel.length-1 && souls >= 10){
-     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+     document.querySelector('#levelName').textContent = "YES DIE FOR US"
    }if (levelNumber == testLevel.length-1 && souls >= 20){
-     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+     document.querySelector('#levelName').textContent = "Your souls will fule us"
    }if (levelNumber == testLevel.length-1 && souls >= 30){
-     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+     document.querySelector('#levelName').textContent = "oh um thank you you can just refresh now"
    }if (levelNumber == testLevel.length-1 && souls >= 40){
-     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+     document.querySelector('#levelName').textContent = "You are verry ditermend arnt you"
    }if (levelNumber == testLevel.length-1 && souls >= 50){
-     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+     document.querySelector('#levelName').textContent = "there is nothing left no point in going on"
    }if (levelNumber == testLevel.length-1 && souls >= 60){
-     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+     document.querySelector('#levelName').textContent = "STOP"
    }if (levelNumber == testLevel.length-1 && souls >= 70){
-     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+     document.querySelector('#levelName').textContent = "Well Okay ll just leave then"
    }
    if (levelNumber == testLevel.length-1 && souls >= 80){
-     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+     document.querySelector('#levelName').textContent = "..."
    }
    if (levelNumber == testLevel.length-1 && souls >= 90){
-     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+     document.querySelector('#levelName').textContent = "Fine make it 100 and I shall reward you"
    }
    if (levelNumber == testLevel.length-1 && souls >= 99){
      document.querySelector('#levelName').textContent = "One more and you will be free"
