@@ -544,7 +544,7 @@
        }
      } else {
        if (souls != 0 && levelNumber == testLevel.length - 2){
-       document.querySelector('#levelName').textContent = "Thanks for dying"
+       document.querySelector('#levelName').textContent = "You've moved " + totalMoves + " times and donated " + souls + " souls."
        window.removeEventListener("keydown", keys)
        let el = document.querySelector("div.Game")
        clearElement(el)
@@ -582,6 +582,9 @@
        let top = document.querySelector("#levelName")
        top.textContent = "You donated " + souls + " souls you little shit so you get to burn in hell"
        let el = document.querySelector("div")
+       el.style.backgroundcolor
+       let body = document.querySelector("body");
+       body.style.backgroundColor = "darkRed";
        load()
      }
      }
@@ -654,7 +657,7 @@
        overlapMulitple(clone, pit) == true) {
        window.removeEventListener("keydown", keys)
        let text = document.createElement("p")
-       text.textContent = "SQUISH"
+       text.textContent = "Clone SQUISH"
        text.setAttribute("class", "looser")
        let winmsg = document.body.querySelector('#winmsg')
        winmsg.appendChild(text)
@@ -751,6 +754,30 @@
      if (overlapMulitple(enemy2, enemy3)) {
        en2y = en2y - 1
      }
+     load()
+     getPosition()
+     if (overlapMulitple(enemy1, enemy2)) {
+       en1y = en1y - 1
+     }
+     if (overlapMulitple(enemy1, enemy3)) {
+       en1y = en1y - 1
+     }
+     if (overlapMulitple(enemy2, enemy3)) {
+       en2y = en2y - 1
+     }
+     load()
+     getPosition()
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
+       oEn1y = oEn1y + 1
+     }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy3)) {
+       oEn1y = oEn1y + 1
+     }
+     if (overlapMulitple(oppositeEnemy2, oppositeEnemy3)) {
+       oEn2y = oEn2y + 1
+     }
+     load()
+     getPosition()
      if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
        oEn1y = oEn1y + 1
      }
@@ -808,6 +835,30 @@
      if (overlapMulitple(enemy2, enemy3)) {
        en2y = en2y + 1
      }
+     load()
+     getPosition()
+     if (overlapMulitple(enemy1, enemy2)) {
+       en1y = en1y + 1
+     }
+     if (overlapMulitple(enemy1, enemy3)) {
+       en1y = en1y + 1
+     }
+     if (overlapMulitple(enemy2, enemy3)) {
+       en2y = en2y + 1
+     }
+     load()
+     getPosition()
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
+       oEn1y = oEn1y - 1
+     }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy3)) {
+       oEn1y = oEn1y - 1
+     }
+     if (overlapMulitple(oppositeEnemy2, oppositeEnemy3)) {
+       oEn2y = oEn2y - 1
+     }
+     load()
+     getPosition()
      if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
        oEn1y = oEn1y - 1
      }
@@ -865,6 +916,30 @@
      if (overlapMulitple(enemy2, enemy3)) {
        en2x = en2x + 1
      }
+     load()
+     getPosition()
+     if (overlapMulitple(enemy1, enemy2)) {
+       en1x = en1x + 1
+     }
+     if (overlapMulitple(enemy1, enemy3)) {
+       en1x = en1x + 1
+     }
+     if (overlapMulitple(enemy2, enemy3)) {
+       en2x = en2x + 1
+     }
+     load()
+     getPosition()
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
+       oEn1x = oEn1x - 1
+     }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy3)) {
+       oEn1x = oEn1x - 1
+     }
+     if (overlapMulitple(oppositeEnemy2, oppositeEnemy3)) {
+       oEn2x = oEn2x - 1
+     }
+     load()
+     getPosition()
      if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
        oEn1x = oEn1x - 1
      }
@@ -922,6 +997,30 @@
      if (overlapMulitple(enemy2, enemy3)) {
        en2x = en2x - 1
      }
+     load()
+     getPosition()
+     if (overlapMulitple(enemy1, enemy2)) {
+       en1x = en1x - 1
+     }
+     if (overlapMulitple(enemy1, enemy3)) {
+       en1x = en1x - 1
+     }
+     if (overlapMulitple(enemy2, enemy3)) {
+       en2x = en2x - 1
+     }
+     load()
+     getPosition()
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
+       oEn1x = oEn1x + 1
+     }
+     if (overlapMulitple(oppositeEnemy1, oppositeEnemy3)) {
+       oEn1x = oEn1x + 1
+     }
+     if (overlapMulitple(oppositeEnemy2, oppositeEnemy3)) {
+       oEn2x = oEn2x + 1
+     }
+     load()
+     getPosition()
      if (overlapMulitple(oppositeEnemy1, oppositeEnemy2)) {
        oEn1x = oEn1x + 1
      }
