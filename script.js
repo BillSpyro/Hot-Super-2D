@@ -200,7 +200,7 @@
  let moves = 0;
  let totalMoves = 0;
  let levelNumber = 0
- let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Aproching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventualy', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think Im a Clone Now',"No escape","I see you is where you are going gotem ", "Victory loop","You donated " + souls + " souls you little shit so you get to burn in hell"]
+ let namearray = ['wasd to move you daft blue ball', 'They move when you do', 'The Hall', 'Oh Your Aproching Me', 'You are Surrounded From this side', 'What If There Was Another One', 'The Notapenis', 'Pitman', 'Let Them DIE', 'Amazeing', 'Im Coming For You ...Eventualy', 'Comb', 'GG EZ', 'Crossroads', 'Mirror', 'I Think Im a Clone Now',"I see you is where you are going gotem ", "Victory loop","You donated " + souls + " souls you little shit so you get to burn in hell"]
  let scalelist = [70, 70,70,70,70,70,70,70,70,70,70,70,70,70,70,50,50,50,50,50,50]
  let scale = scalelist[levelNumber];
  var Level = class Level {
@@ -713,6 +713,43 @@
    let simpleLevel = new Level(testLevel[levelNumber]);
    let display = new DOMDisplay(document.body.querySelector("div.Game"), simpleLevel);
    display.syncState(State.start(simpleLevel));
+   if (levelNumber == testLevel.length-1 && souls >= 5){
+     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+   }
+   if (levelNumber == testLevel.length-1 && souls >= 10){
+     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+   }if (levelNumber == testLevel.length-1 && souls >= 20){
+     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+   }if (levelNumber == testLevel.length-1 && souls >= 30){
+     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+   }if (levelNumber == testLevel.length-1 && souls >= 40){
+     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+   }if (levelNumber == testLevel.length-1 && souls >= 50){
+     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+   }if (levelNumber == testLevel.length-1 && souls >= 60){
+     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+   }if (levelNumber == testLevel.length-1 && souls >= 70){
+     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+   }
+   if (levelNumber == testLevel.length-1 && souls >= 80){
+     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+   }
+   if (levelNumber == testLevel.length-1 && souls >= 90){
+     document.querySelector('#levelName').textContent = "YES DIE FOR ME"
+   }
+   if (levelNumber == testLevel.length-1 && souls >= 99){
+     document.querySelector('#levelName').textContent = "One more and you will be free"
+   }
+   if (levelNumber == testLevel.length-1 && souls >= 100){
+     moves = 0;
+     totalMoves = 0;
+     souls = 0;
+     levelNumber = 0
+     clearElement(winmsg)
+     window.addEventListener("keydown", keys)
+     resetPositions()
+     load()
+   }
  }
  window.addEventListener("keydown", reee)
  function reee(){
@@ -728,6 +765,8 @@
    window.addEventListener("keydown", keys)
    let winmsg = document.body.querySelector('#winmsg')
    clearElement(winmsg)
+
+
  }
 
  }
